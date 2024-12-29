@@ -23,3 +23,13 @@ type MarkxusConfig struct {
 }
 
 var Config MarkxusConfig
+
+var (
+	KeyGenAiApiKey             = "genai_api_key"
+	KeyGenAiModelName          = "genai_model_name"
+	KeyMarkxusPromptFormat     = "genai_prompt_format"
+	KeyNexusApiKey             = "nexus_api_key"
+	KeyNexusUrlGetModFormat    = "nexus_url_get_mod_format"
+	KeyMarkxusUrlModPageFormat = "nexus_url_mod_page_format"
+	KeyMarkdownHeaderFormat    = "markdown_header_format"
+)

@@ -9,7 +9,7 @@ import (
 var (
 	GenAICategory = "GenAI"
 
-	GenAiApiKey = &cli.StringFlag{
+	FlagGenAiApiKey = &cli.StringFlag{
 		Name:        "genai-key",
 		Aliases:     []string{"gk"},
 		Destination: &Config.GenAi.ApiKey,
@@ -19,12 +19,12 @@ var (
 
 		Sources: cli.NewValueSourceChain(
 			cli.EnvVar("GEN_AI_API_KEY"),
-			cli.NewMapValueSource("genai_api_key", LocalYamlSource),
-			cli.NewMapValueSource("genai_api_key", KeyringSource),
+			cli.NewMapValueSource(KeyGenAiApiKey, LocalYamlSource),
+			cli.NewMapValueSource(KeyGenAiApiKey, KeyringSource),
 		),
 	}
 
-	GenAiModelName = &cli.StringFlag{
+	FlagGenAiModelName = &cli.StringFlag{
 		Name:        "model",
 		Aliases:     []string{"m"},
 		Destination: &Config.GenAi.ModelName,
@@ -34,12 +34,12 @@ var (
 
 		Sources: cli.NewValueSourceChain(
 			cli.EnvVar("GEN_AI_MODEL_NAME"),
-			cli.NewMapValueSource("genai_model_name", LocalYamlSource),
-			cli.NewMapValueSource("genai_model_name", GlobalYamlSource),
+			cli.NewMapValueSource(KeyGenAiModelName, LocalYamlSource),
+			cli.NewMapValueSource(KeyGenAiModelName, GlobalYamlSource),
 		),
 	}
 
-	MarkxusPromptFormat = &cli.StringFlag{
+	FlagMarkxusPromptFormat = &cli.StringFlag{
 		Name:        "prompt",
 		Aliases:     []string{"p"},
 		Destination: &Config.GenAi.Prompt,
@@ -49,8 +49,8 @@ var (
 
 		Sources: cli.NewValueSourceChain(
 			cli.EnvVar("NEXUS_URL_GET_MOD_FORMAT"),
-			cli.NewMapValueSource("nexus_url_get_mod_format", LocalYamlSource),
-			cli.NewMapValueSource("nexus_url_get_mod_format", GlobalYamlSource),
+			cli.NewMapValueSource(KeyMarkxusPromptFormat, LocalYamlSource),
+			cli.NewMapValueSource(KeyMarkxusPromptFormat, GlobalYamlSource),
 		),
 	}
 )
@@ -58,7 +58,7 @@ var (
 var (
 	NexusCategory = "Nexus"
 
-	NexusApiKey = &cli.StringFlag{
+	FlagNexusApiKey = &cli.StringFlag{
 		Name:        "nexus-key",
 		Aliases:     []string{"nk"},
 		Destination: &Config.Nexus.ApiKey,
@@ -68,12 +68,12 @@ var (
 
 		Sources: cli.NewValueSourceChain(
 			cli.EnvVar("NEXUS_API_KEY"),
-			cli.NewMapValueSource("nexus_api_key", LocalYamlSource),
-			cli.NewMapValueSource("nexus_api_key", KeyringSource),
+			cli.NewMapValueSource(KeyNexusApiKey, LocalYamlSource),
+			cli.NewMapValueSource(KeyNexusApiKey, KeyringSource),
 		),
 	}
 
-	NexusUrlGetModFormat = &cli.StringFlag{
+	FlagNexusUrlGetModFormat = &cli.StringFlag{
 		Name:        "api-url-format",
 		Aliases:     []string{"af"},
 		Destination: &Config.Nexus.Url.GetModFormat,
@@ -83,12 +83,12 @@ var (
 
 		Sources: cli.NewValueSourceChain(
 			cli.EnvVar("NEXUS_URL_GET_MOD_FORMAT"),
-			cli.NewMapValueSource("nexus_url_get_mod_format", LocalYamlSource),
-			cli.NewMapValueSource("nexus_url_get_mod_format", GlobalYamlSource),
+			cli.NewMapValueSource(KeyNexusUrlGetModFormat, LocalYamlSource),
+			cli.NewMapValueSource(KeyNexusUrlGetModFormat, GlobalYamlSource),
 		),
 	}
 
-	MarkxusUrlModPageFormat = &cli.StringFlag{
+	FlagMarkxusUrlModPageFormat = &cli.StringFlag{
 		Name:        "page-url-format",
 		Aliases:     []string{"pf"},
 		Destination: &Config.Nexus.Url.ModPageFormat,
@@ -98,8 +98,8 @@ var (
 
 		Sources: cli.NewValueSourceChain(
 			cli.EnvVar("NEXUS_URL_MOD_PAGE_FORMAT"),
-			cli.NewMapValueSource("nexus_url_mod_page_format", LocalYamlSource),
-			cli.NewMapValueSource("nexus_url_mod_page_format", GlobalYamlSource),
+			cli.NewMapValueSource(KeyMarkxusUrlModPageFormat, LocalYamlSource),
+			cli.NewMapValueSource(KeyMarkxusUrlModPageFormat, GlobalYamlSource),
 		),
 	}
 )
@@ -107,7 +107,7 @@ var (
 var (
 	GenerationCategory = "Markdown"
 
-	MarkdownHeaderFormat = &cli.StringFlag{
+	FlagMarkdownHeaderFormat = &cli.StringFlag{
 		Name:        "header-format",
 		Aliases:     []string{"hf"},
 		Destination: &Config.Generation.HeaderFormat,
@@ -117,18 +117,18 @@ var (
 
 		Sources: cli.NewValueSourceChain(
 			cli.EnvVar("MARKDOWN_HEADER_FORMAT"),
-			cli.NewMapValueSource("markdown_header_format", LocalYamlSource),
-			cli.NewMapValueSource("markdown_header_format", GlobalYamlSource),
+			cli.NewMapValueSource(KeyMarkdownHeaderFormat, LocalYamlSource),
+			cli.NewMapValueSource(KeyMarkdownHeaderFormat, GlobalYamlSource),
 		),
 	}
 )
 
 var AllFlags = []cli.Flag{
-	GenAiApiKey,
-	GenAiModelName,
-	MarkxusPromptFormat,
-	NexusApiKey,
-	NexusUrlGetModFormat,
-	MarkxusUrlModPageFormat,
-	MarkdownHeaderFormat,
+	FlagGenAiApiKey,
+	FlagGenAiModelName,
+	FlagMarkxusPromptFormat,
+	FlagNexusApiKey,
+	FlagNexusUrlGetModFormat,
+	FlagMarkxusUrlModPageFormat,
+	FlagMarkdownHeaderFormat,
 }

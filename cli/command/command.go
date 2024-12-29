@@ -1,10 +1,14 @@
 package command
 
 import (
-	"github.com/slainless/markxus/cli/config"
+	"github.com/slainless/markxus/cli/command/config"
 	"github.com/urfave/cli/v3"
 )
 
 var Main = &cli.Command{
-	Flags: config.AllFlags,
+	Name:  "Markxus CLI",
+	Usage: "LLM-powered markdown converter for Nexus Mods page",
+	Commands: []*cli.Command{
+		config.Command,
+	},
 }

@@ -7,8 +7,8 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-var GlobalConfigDir string
-var LocalConfigDir string
+var GlobalConfigPath string
+var LocalConfigPath string
 
 var GlobalYamlSource KV
 var LocalYamlSource KV
@@ -24,16 +24,16 @@ func init() {
 		panic(err)
 	}
 
-	GlobalConfigDir = path.Join(home, ".markxus.yml")
-	LocalConfigDir = path.Join(cwd, ".markxus.yml")
+	GlobalConfigPath = path.Join(home, ".markxus.yml")
+	LocalConfigPath = path.Join(cwd, ".markxus.yml")
 
-	GlobalYamlSource = NewYamlSource(GlobalConfigDir)
-	LocalYamlSource = NewYamlSource(LocalConfigDir)
+	GlobalYamlSource = NewYamlSource(GlobalConfigPath)
+	LocalYamlSource = NewYamlSource(LocalConfigPath)
 }
 
 func NewYamlSource(path string) KV {
 	kv := KV{}
-	config, err := os.ReadFile(GlobalConfigDir)
+	config, err := os.ReadFile(GlobalConfigPath)
 	if err != nil {
 		return kv
 	}
