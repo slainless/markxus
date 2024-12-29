@@ -7,7 +7,7 @@ import (
 
 	"github.com/charmbracelet/lipgloss"
 	"github.com/slainless/markxus/cli/markxus/config"
-	"github.com/slainless/markxus/cli/markxus/internal"
+	"github.com/slainless/markxus/cli/markxus/internal/style"
 	"github.com/urfave/cli/v3"
 )
 
@@ -34,7 +34,7 @@ func action(ctx context.Context, c *cli.Command) error {
 	_ = config.SetKeyring(config.KeyGenAiApiKey, aiKey)
 	_ = config.SetKeyring(config.KeyNexusApiKey, nexusKey)
 
-	theme := internal.GetTheme()
+	theme := style.GetTheme()
 	var cardContent strings.Builder
 	fmt.Fprintf(&cardContent,
 		lipgloss.NewStyle().
@@ -45,14 +45,7 @@ func action(ctx context.Context, c *cli.Command) error {
 		),
 	)
 
-	fmt.Println(
-		lipgloss.NewStyle().
-			Padding(1, 2).
-			Width(40).
-			Border(lipgloss.RoundedBorder()).
-			BorderForeground(theme.FieldSeparator.GetForeground()).
-			Render(cardContent.String()),
-	)
+	fmt.Println(style.Card().Render(cardContent.String()))
 
 	return err
 }
