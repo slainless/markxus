@@ -20,6 +20,10 @@ type MarkxusConfig struct {
 	Generation struct {
 		HeaderFormat string
 	}
+
+	Helper struct {
+		FallbackGameCode string
+	}
 }
 
 var Config MarkxusConfig
@@ -32,4 +36,5 @@ var (
 	KeyNexusUrlGetModFormat    = "nexus_url_get_mod_format"
 	KeyMarkxusUrlModPageFormat = "nexus_url_mod_page_format"
 	KeyMarkdownHeaderFormat    = "markdown_header_format"
+	KeyFallbackGameCode        = "fallback_game_code"
 )

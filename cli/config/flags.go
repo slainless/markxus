@@ -1,6 +1,7 @@
 package config
 
 import (
+	"github.com/slainless/markxus"
 	"github.com/slainless/markxus/genai"
 	"github.com/slainless/markxus/nexus"
 	"github.com/urfave/cli/v3"
@@ -48,7 +49,7 @@ var (
 		Usage:       "Prompt format to be used for generative ai requests",
 
 		Sources: cli.NewValueSourceChain(
-			cli.EnvVar("NEXUS_URL_GET_MOD_FORMAT"),
+			cli.EnvVar("GEN_AI_PROMPT_FORMAT"),
 			cli.NewMapValueSource(KeyMarkxusPromptFormat, LocalYamlSource),
 			cli.NewMapValueSource(KeyMarkxusPromptFormat, GlobalYamlSource),
 		),
@@ -93,7 +94,7 @@ var (
 		Aliases:     []string{"pf"},
 		Destination: &Config.Nexus.Url.ModPageFormat,
 		Category:    "Nexus",
-		DefaultText: "[[DefaultUrlModPageFormat]]",
+		DefaultText: markxus.DefaultUrlModPageFormat,
 		Usage:       "URL format to be for mod page",
 
 		Sources: cli.NewValueSourceChain(
@@ -119,6 +120,24 @@ var (
 			cli.EnvVar("MARKDOWN_HEADER_FORMAT"),
 			cli.NewMapValueSource(KeyMarkdownHeaderFormat, LocalYamlSource),
 			cli.NewMapValueSource(KeyMarkdownHeaderFormat, GlobalYamlSource),
+		),
+	}
+)
+
+var (
+	HelperCategory = "Helper"
+
+	FlagFallbackGameCode = &cli.StringFlag{
+		Name:        "game-code",
+		Aliases:     []string{"gc"},
+		Destination: &Config.Helper.FallbackGameCode,
+		Category:    HelperCategory,
+		Usage:       "Fallback game code to use when no game code supplied in args",
+
+		Sources: cli.NewValueSourceChain(
+			cli.EnvVar("FALLBACK_GAME_CODE"),
+			cli.NewMapValueSource(KeyFallbackGameCode, LocalYamlSource),
+			cli.NewMapValueSource(KeyFallbackGameCode, GlobalYamlSource),
 		),
 	}
 )
