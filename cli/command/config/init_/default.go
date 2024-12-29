@@ -10,14 +10,14 @@ import (
 func defaultConfig() map[string]any {
 	kv := map[string]any{}
 
-	kv[config.KeyGenAiApiKey] = ""
-	kv[config.KeyGenAiModelName] = genai.DefaultModelName
-	kv[config.KeyMarkxusPromptFormat] = markxus.DefaultGenAiPromptFormat
+	kv[config.YamlKeyGenAiApiKey] = ""
+	kv[config.YamlKeyGenAiModelName] = genai.DefaultModelName
+	kv[config.YamlKeyMarkxusPromptFormat] = markxus.DefaultGenAiPromptFormat
 
-	kv[config.KeyNexusApiKey] = ""
-	kv[config.KeyNexusUrlGetModFormat] = nexus.DefaultUrlGetModFormat
-	kv[config.KeyMarkxusUrlModPageFormat] = markxus.DefaultUrlModPageFormat
-	kv[config.KeyMarkdownHeaderFormat] = markxus.DefaultMarkdownHeaderFormat
+	kv[config.YamlKeyNexusApiKey] = ""
+	kv[config.YamlKeyNexusUrlGetModFormat] = nexus.DefaultUrlGetModFormat
+	kv[config.YamlKeyMarkxusUrlModPageFormat] = markxus.DefaultUrlModPageFormat
+	kv[config.YamlKeyMarkdownHeaderFormat] = markxus.DefaultMarkdownHeaderFormat
 
 	return kv
 }

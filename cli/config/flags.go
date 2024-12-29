@@ -19,9 +19,9 @@ var (
 		Usage:       "API key to be used for generative ai requests",
 
 		Sources: cli.NewValueSourceChain(
-			cli.EnvVar("GEN_AI_API_KEY"),
-			cli.NewMapValueSource(KeyGenAiApiKey, LocalYamlSource),
-			cli.NewMapValueSource(KeyGenAiApiKey, KeyringSource),
+			cli.EnvVar(EnvKeyGenAiApiKey),
+			cli.NewMapValueSource(YamlKeyGenAiApiKey, LocalYamlSource),
+			cli.NewMapValueSource(YamlKeyGenAiApiKey, KeyringSource),
 		),
 	}
 
@@ -34,9 +34,9 @@ var (
 		Usage:       "Model name to be used for generative ai requests",
 
 		Sources: cli.NewValueSourceChain(
-			cli.EnvVar("GEN_AI_MODEL_NAME"),
-			cli.NewMapValueSource(KeyGenAiModelName, LocalYamlSource),
-			cli.NewMapValueSource(KeyGenAiModelName, GlobalYamlSource),
+			cli.EnvVar(EnvKeyGenAiModelName),
+			cli.NewMapValueSource(YamlKeyGenAiModelName, LocalYamlSource),
+			cli.NewMapValueSource(YamlKeyGenAiModelName, GlobalYamlSource),
 		),
 	}
 
@@ -49,9 +49,9 @@ var (
 		Usage:       "Prompt format to be used for generative ai requests",
 
 		Sources: cli.NewValueSourceChain(
-			cli.EnvVar("GEN_AI_PROMPT_FORMAT"),
-			cli.NewMapValueSource(KeyMarkxusPromptFormat, LocalYamlSource),
-			cli.NewMapValueSource(KeyMarkxusPromptFormat, GlobalYamlSource),
+			cli.EnvVar(EnvKeyMarkxusPromptFormat),
+			cli.NewMapValueSource(YamlKeyMarkxusPromptFormat, LocalYamlSource),
+			cli.NewMapValueSource(YamlKeyMarkxusPromptFormat, GlobalYamlSource),
 		),
 	}
 )
@@ -68,9 +68,9 @@ var (
 		Usage:       "API key to be used for nexus requests",
 
 		Sources: cli.NewValueSourceChain(
-			cli.EnvVar("NEXUS_API_KEY"),
-			cli.NewMapValueSource(KeyNexusApiKey, LocalYamlSource),
-			cli.NewMapValueSource(KeyNexusApiKey, KeyringSource),
+			cli.EnvVar(EnvKeyNexusApiKey),
+			cli.NewMapValueSource(YamlKeyNexusApiKey, LocalYamlSource),
+			cli.NewMapValueSource(YamlKeyNexusApiKey, KeyringSource),
 		),
 	}
 
@@ -83,9 +83,9 @@ var (
 		Usage:       "URL format to be for mod data API",
 
 		Sources: cli.NewValueSourceChain(
-			cli.EnvVar("NEXUS_URL_GET_MOD_FORMAT"),
-			cli.NewMapValueSource(KeyNexusUrlGetModFormat, LocalYamlSource),
-			cli.NewMapValueSource(KeyNexusUrlGetModFormat, GlobalYamlSource),
+			cli.EnvVar(EnvKeyNexusUrlGetModFormat),
+			cli.NewMapValueSource(YamlKeyNexusUrlGetModFormat, LocalYamlSource),
+			cli.NewMapValueSource(YamlKeyNexusUrlGetModFormat, GlobalYamlSource),
 		),
 	}
 
@@ -98,9 +98,9 @@ var (
 		Usage:       "URL format to be for mod page",
 
 		Sources: cli.NewValueSourceChain(
-			cli.EnvVar("NEXUS_URL_MOD_PAGE_FORMAT"),
-			cli.NewMapValueSource(KeyMarkxusUrlModPageFormat, LocalYamlSource),
-			cli.NewMapValueSource(KeyMarkxusUrlModPageFormat, GlobalYamlSource),
+			cli.EnvVar(EnvKeyMarkxusUrlModPageFormat),
+			cli.NewMapValueSource(YamlKeyMarkxusUrlModPageFormat, LocalYamlSource),
+			cli.NewMapValueSource(YamlKeyMarkxusUrlModPageFormat, GlobalYamlSource),
 		),
 	}
 )
@@ -117,9 +117,9 @@ var (
 		Usage:       "Template to be used for markdown header",
 
 		Sources: cli.NewValueSourceChain(
-			cli.EnvVar("MARKDOWN_HEADER_FORMAT"),
-			cli.NewMapValueSource(KeyMarkdownHeaderFormat, LocalYamlSource),
-			cli.NewMapValueSource(KeyMarkdownHeaderFormat, GlobalYamlSource),
+			cli.EnvVar(EnvKeyMarkdownHeaderFormat),
+			cli.NewMapValueSource(YamlKeyMarkdownHeaderFormat, LocalYamlSource),
+			cli.NewMapValueSource(YamlKeyMarkdownHeaderFormat, GlobalYamlSource),
 		),
 	}
 )
@@ -136,8 +136,8 @@ var (
 
 		Sources: cli.NewValueSourceChain(
 			cli.EnvVar("FALLBACK_GAME_CODE"),
-			cli.NewMapValueSource(KeyFallbackGameCode, LocalYamlSource),
-			cli.NewMapValueSource(KeyFallbackGameCode, GlobalYamlSource),
+			cli.NewMapValueSource(YamlKeyFallbackGameCode, LocalYamlSource),
+			cli.NewMapValueSource(YamlKeyFallbackGameCode, GlobalYamlSource),
 		),
 	}
 )

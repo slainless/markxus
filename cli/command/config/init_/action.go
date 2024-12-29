@@ -31,8 +31,8 @@ func action(ctx context.Context, c *cli.Command) error {
 		return err
 	}
 
-	_ = config.SetKeyring(config.KeyGenAiApiKey, aiKey)
-	_ = config.SetKeyring(config.KeyNexusApiKey, nexusKey)
+	_ = config.SetKeyring(config.YamlKeyGenAiApiKey, aiKey)
+	_ = config.SetKeyring(config.YamlKeyNexusApiKey, nexusKey)
 
 	theme := style.GetTheme()
 	var cardContent strings.Builder

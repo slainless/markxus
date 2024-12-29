@@ -29,12 +29,23 @@ type MarkxusConfig struct {
 var Config MarkxusConfig
 
 var (
-	KeyGenAiApiKey             = "genai_api_key"
-	KeyGenAiModelName          = "genai_model_name"
-	KeyMarkxusPromptFormat     = "genai_prompt_format"
-	KeyNexusApiKey             = "nexus_api_key"
-	KeyNexusUrlGetModFormat    = "nexus_url_get_mod_format"
-	KeyMarkxusUrlModPageFormat = "nexus_url_mod_page_format"
-	KeyMarkdownHeaderFormat    = "markdown_header_format"
-	KeyFallbackGameCode        = "fallback_game_code"
+	YamlKeyGenAiApiKey             = "genai_api_key"
+	YamlKeyGenAiModelName          = "genai_model_name"
+	YamlKeyMarkxusPromptFormat     = "genai_prompt_format"
+	YamlKeyNexusApiKey             = "nexus_api_key"
+	YamlKeyNexusUrlGetModFormat    = "nexus_url_get_mod_format"
+	YamlKeyMarkxusUrlModPageFormat = "nexus_url_mod_page_format"
+	YamlKeyMarkdownHeaderFormat    = "markdown_header_format"
+	YamlKeyFallbackGameCode        = "fallback_game_code"
+)
+
+var (
+	EnvKeyGenAiApiKey             = "GEN_AI_API_KEY"
+	EnvKeyGenAiModelName          = "GEN_AI_MODEL_NAME"
+	EnvKeyMarkxusPromptFormat     = "GEN_AI_PROMPT_FORMAT"
+	EnvKeyNexusApiKey             = "NEXUS_API_KEY"
+	EnvKeyNexusUrlGetModFormat    = "NEXUS_URL_GET_MOD_FORMAT"
+	EnvKeyMarkxusUrlModPageFormat = "NEXUS_URL_MOD_PAGE_FORMAT"
+	EnvKeyMarkdownHeaderFormat    = "MARKDOWN_HEADER_FORMAT"
+	EnvKeyFallbackGameCode        = "FALLBACK_GAME_CODE"
 )
