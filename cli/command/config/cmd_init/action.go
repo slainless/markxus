@@ -2,11 +2,7 @@ package cmd_init
 
 import (
 	"context"
-	"fmt"
-	"os"
 
-	"github.com/charmbracelet/huh"
-	"github.com/charmbracelet/lipgloss"
 	"github.com/slainless/markxus/cli/markxus/config"
 	"github.com/urfave/cli/v3"
 	"gopkg.in/yaml.v3"
@@ -14,70 +10,31 @@ import (
 
 func action(ctx context.Context, c *cli.Command) error {
 	if initConfig.force {
-		return writeToFile()
+		return writeToFile(configPath(initConfig.configType.String()))
 	}
 
-	configType := "global"
-	typeForm := huh.NewForm(
-		huh.NewGroup(
-			huh.NewSelect[string]().
-				Title("Select config type").
-				Options(
-					huh.NewOption("Global", "global"),
-					huh.NewOption("Local", "local"),
-				).
-				Value(&configType),
-		),
-	)
-
-	err := typeForm.RunWithContext(ctx)
+	configType, err := PromptConfigType(ctx)
 	if err != nil {
 		return err
 	}
 
-	handle, err := os.OpenFile(configPath(), os.O_WRONLY, 0600)
-	if os.IsNotExist(err) {
-		return writeToFile()
-	} else if err != nil {
-		return err
-	}
-	defer handle.Close()
-
-	var confirm bool
-	confirmForm := huh.NewForm(
-		huh.NewGroup(
-			huh.NewConfirm().
-				Title("Config already exist, overwrite?").
-				WithButtonAlignment(lipgloss.Left).
-				Value(&confirm),
-		),
-	)
-
-	err = confirmForm.RunWithContext(ctx)
+	err = writeConfig(ctx, configType)
 	if err != nil {
 		return err
 	}
 
-	if !confirm {
-		return nil
-	}
-
-	err = handle.Truncate(0)
+	aiKey, nexusKey, err := PromptApiKey(ctx)
 	if err != nil {
 		return err
 	}
 
-	data, err := createConfigData()
-	if err != nil {
-		return err
-	}
-
-	_, err = handle.Write(data)
+	_ = config.SetKeyring(config.KeyGenAiApiKey, aiKey)
+	_ = config.SetKeyring(config.KeyNexusApiKey, nexusKey)
 	return err
 }
 
-func configPath() string {
-	switch initConfig.configType.String() {
+func configPath(configType string) string {
+	switch configType {
 	case "global":
 		return config.GlobalConfigPath
 	case "local":
@@ -94,23 +51,4 @@ func createConfigData() ([]byte, error) {
 	}
 
 	return data, nil
-}
-
-func writeToFile() error {
-	data, err := createConfigData()
-	if err != nil {
-		return err
-	}
-
-	path := configPath()
-	if path == "" {
-		return fmt.Errorf("invalid config type: %s", initConfig.configType.String())
-	}
-
-	err = os.WriteFile(path, data, 0600)
-	if err != nil {
-		return err
-	}
-
-	return nil
 }
