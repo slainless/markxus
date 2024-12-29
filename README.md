@@ -179,7 +179,7 @@ By default, it will output the resulting markdown to current working directory w
 
 If `$game_code` is not supplied, it will fallback to config & env vars. If none are available, the program will exit.
 
-Flags also available to alter the command's behaviour:
+Aside from configuration flags, these flags are also available to alter the command's behaviour:
 - `--force` or `FORCE_OVERWRITE`: Force overwrite conflicting file, if exist, skipping prompt.
 
 ### Generate multiple markdowns
