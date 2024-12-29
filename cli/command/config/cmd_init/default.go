@@ -2,7 +2,7 @@ package cmd_init
 
 import (
 	"github.com/slainless/markxus"
-	"github.com/slainless/markxus/cli/config"
+	"github.com/slainless/markxus/cli/markxus/config"
 	"github.com/slainless/markxus/genai"
 	"github.com/slainless/markxus/nexus"
 )

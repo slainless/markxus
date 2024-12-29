@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/slainless/markxus/cli/command/config/cmd_init"
+	"github.com/slainless/markxus/cli/markxus/command/config/cmd_init"
 	"github.com/urfave/cli/v3"
 )
 

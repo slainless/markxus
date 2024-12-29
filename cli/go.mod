@@ -1,4 +1,4 @@
-module github.com/slainless/markxus/cli
+module github.com/slainless/markxus/cli/markxus
 
 go 1.23.4
 

@@ -7,7 +7,7 @@ import (
 
 	"github.com/charmbracelet/huh"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/slainless/markxus/cli/config"
+	"github.com/slainless/markxus/cli/markxus/config"
 	"github.com/urfave/cli/v3"
 	"gopkg.in/yaml.v3"
 )

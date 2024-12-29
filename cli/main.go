@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
-	"github.com/slainless/markxus/cli/command"
+	"github.com/slainless/markxus/cli/markxus/command"
 )
 
 func main() {

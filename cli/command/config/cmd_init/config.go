@@ -1,6 +1,6 @@
 package cmd_init
 
-import "github.com/slainless/markxus/cli/internal"
+import "github.com/slainless/markxus/cli/markxus/internal"
 
 var initConfig = struct {
 	force      bool
