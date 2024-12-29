@@ -15,7 +15,7 @@ a dedicated `cli` package must be created instead to make use of these interface
 ## Obsidian markdown
 
 The default markdown header format contains frontmatter and only a handful number of editors are capable of making use of these data.
-Obsidian is prominently known for features and its rich community support. Obsidian by default support showing and editing frontmatter. 
+Obsidian is prominently known its for features and its rich community support. Obsidian by default support showing and editing frontmatter. 
 Obsidian community also has many plugins that can handle these data.
 
 I planned to support these plugins:
