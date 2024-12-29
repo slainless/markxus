@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/charmbracelet/huh"
+	"github.com/charmbracelet/lipgloss"
 	"github.com/slainless/markxus/cli/config"
 	"github.com/urfave/cli/v3"
 	"gopkg.in/yaml.v3"
@@ -47,6 +48,7 @@ func action(ctx context.Context, c *cli.Command) error {
 		huh.NewGroup(
 			huh.NewConfirm().
 				Title("Config already exist, overwrite?").
+				WithButtonAlignment(lipgloss.Left).
 				Value(&confirm),
 		),
 	)
