@@ -6,12 +6,8 @@ import (
 )
 
 type MarkxusOptions struct {
-	GenAiPromptFormat string
-	GenAiModelName    string
-	GenAiApiKey       string
-
-	UrlModPageFormat string
-
+	GenAiPromptFormat      string
+	UrlModPageFormat       string
 	MarkdownHeaderTemplate *template.Template
 }
 
@@ -45,19 +41,6 @@ type MarkxusOption func(*MarkxusOptions)
 func WithPromptFormat(prompt string) MarkxusOption {
 	return func(mo *MarkxusOptions) {
 		mo.GenAiPromptFormat = prompt
-	}
-}
-
-// Defaults to [[DefaultGenAiModelName]]
-func WithModelName(model string) MarkxusOption {
-	return func(mo *MarkxusOptions) {
-		mo.GenAiModelName = model
-	}
-}
-
-func WithGenAiApiKey(key string) MarkxusOption {
-	return func(mo *MarkxusOptions) {
-		mo.GenAiApiKey = key
 	}
 }
 

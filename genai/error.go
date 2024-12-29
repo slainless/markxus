@@ -1,4 +1,4 @@
-package markxus
+package genai
 
 import (
 	"fmt"

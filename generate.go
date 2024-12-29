@@ -7,7 +7,6 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/google/generative-ai-go/genai"
 	"github.com/slainless/markxus/nexus"
 )
 
@@ -15,6 +14,7 @@ type Generated struct {
 	Mod     nexus.SchemaMod
 	Content string
 	Header  string
+	Error   error
 }
 
 func (c *Markxus) Generate(ctx context.Context, gameCode string, modId string) (*Generated, error) {
@@ -23,64 +23,28 @@ func (c *Markxus) Generate(ctx context.Context, gameCode string, modId string) (
 		return nil, err
 	}
 
-	mod.PageUrl = fmt.Sprintf(c.genaiOptions.UrlModPageFormat, gameCode, modId)
+	mod.PageUrl = fmt.Sprintf(c.options.UrlModPageFormat, gameCode, modId)
 
 	header, err := processHeader(
-		c.genaiOptions.MarkdownHeaderTemplate,
+		c.options.MarkdownHeaderTemplate,
 		mod,
 	)
 	if err != nil {
 		return nil, err
 	}
 
-	model := c.genai.GenerativeModel(c.genaiOptions.GenAiModelName)
-
-	cs := model.StartChat()
-
-	initial, err := cs.SendMessage(ctx, genai.Text(fmt.Sprintf(c.genaiOptions.GenAiPromptFormat, mod.Description)))
-	if err != nil {
+	prompt := fmt.Sprintf(c.options.GenAiPromptFormat, mod.Description)
+	output, err := c.llm.Send(ctx, prompt, mod)
+	if len(output) < 1 {
 		return nil, err
 	}
-
-	var output string
-	err = processResponse(initial, &output, ctx, cs)
 
 	return &Generated{
 		Content: output,
 		Mod:     *mod,
 		Header:  header,
-	}, err
-}
-
-func processResponse(response *genai.GenerateContentResponse, output *string, ctx context.Context, cs *genai.ChatSession) error {
-	for _, candidate := range response.Candidates {
-		if candidate.Content != nil {
-			for _, part := range candidate.Content.Parts {
-				switch value := part.(type) {
-				case genai.Text:
-					*output += string(value)
-				}
-			}
-		}
-
-		switch candidate.FinishReason {
-		case genai.FinishReasonUnspecified, genai.FinishReasonStop:
-			return nil
-		case genai.FinishReasonMaxTokens:
-			response, err := cs.SendMessage(ctx, genai.Text("Continue"))
-			if err != nil {
-				return err
-			}
-
-			return processResponse(response, output, ctx, cs)
-		case genai.FinishReasonOther, genai.FinishReasonRecitation, genai.FinishReasonSafety:
-			return &AIGenerationError{
-				Reason: candidate.FinishReason,
-			}
-		}
-	}
-
-	return nil
+		Error:   err,
+	}, nil
 }
 
 func processHeader(format *template.Template, mod *nexus.SchemaMod) (string, error) {
