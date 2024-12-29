@@ -23,21 +23,21 @@ func (c *Markxus) Generate(ctx context.Context, gameCode string, modId string) (
 		return nil, err
 	}
 
-	mod.PageUrl = fmt.Sprintf(c.genaiOptions.urlModPageFormat, gameCode, modId)
+	mod.PageUrl = fmt.Sprintf(c.genaiOptions.UrlModPageFormat, gameCode, modId)
 
 	header, err := processHeader(
-		c.genaiOptions.markdownHeaderTemplate,
+		c.genaiOptions.MarkdownHeaderTemplate,
 		mod,
 	)
 	if err != nil {
 		return nil, err
 	}
 
-	model := c.genai.GenerativeModel(c.genaiOptions.genAiModelName)
+	model := c.genai.GenerativeModel(c.genaiOptions.GenAiModelName)
 
 	cs := model.StartChat()
 
-	initial, err := cs.SendMessage(ctx, genai.Text(fmt.Sprintf(c.genaiOptions.genAiPromptFormat, mod.Description)))
+	initial, err := cs.SendMessage(ctx, genai.Text(fmt.Sprintf(c.genaiOptions.GenAiPromptFormat, mod.Description)))
 	if err != nil {
 		return nil, err
 	}

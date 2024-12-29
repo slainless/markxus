@@ -12,7 +12,7 @@ import (
 
 type Markxus struct {
 	genai        *genai.Client
-	genaiOptions *markxusOptions
+	genaiOptions *MarkxusOptions
 
 	nexus *nexus.Client
 }
@@ -20,22 +20,22 @@ type Markxus struct {
 func NewMarkxus(ctx context.Context, nexusClient *nexus.Client, options ...MarkxusOption) (*Markxus, error) {
 	var err error
 
-	genaiOptions := &markxusOptions{
-		genAiPromptFormat:      DefaultGenAiPromptFormat,
-		genAiModelName:         DefaultGenAiModelName,
-		urlModPageFormat:       DefaultUrlModPageFormat,
-		markdownHeaderTemplate: DefaultMarkdownHeaderTemplate,
+	genaiOptions := &MarkxusOptions{
+		GenAiPromptFormat:      DefaultGenAiPromptFormat,
+		GenAiModelName:         DefaultGenAiModelName,
+		UrlModPageFormat:       DefaultUrlModPageFormat,
+		MarkdownHeaderTemplate: DefaultMarkdownHeaderTemplate,
 	}
 
 	for _, option := range options {
 		option(genaiOptions)
 	}
 
-	if genaiOptions.genAiApiKey == "" {
+	if genaiOptions.GenAiApiKey == "" {
 		return nil, ErrorGenAiNoApiKey
 	}
 
-	genai, err := genai.NewClient(ctx, option.WithAPIKey(genaiOptions.genAiApiKey))
+	genai, err := genai.NewClient(ctx, option.WithAPIKey(genaiOptions.GenAiApiKey))
 	if err != nil {
 		return nil, err
 	}

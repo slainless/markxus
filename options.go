@@ -5,14 +5,14 @@ import (
 	"text/template"
 )
 
-type markxusOptions struct {
-	genAiPromptFormat string
-	genAiModelName    string
-	genAiApiKey       string
+type MarkxusOptions struct {
+	GenAiPromptFormat string
+	GenAiModelName    string
+	GenAiApiKey       string
 
-	urlModPageFormat string
+	UrlModPageFormat string
 
-	markdownHeaderTemplate *template.Template
+	MarkdownHeaderTemplate *template.Template
 }
 
 //go:embed prompt.txt
@@ -34,7 +34,7 @@ func init() {
 const DefaultGenAiModelName = "gemini-1.5-flash"
 const DefaultUrlModPageFormat = "https://nexusmods.com/%v/mods/%v"
 
-type MarkxusOption func(*markxusOptions)
+type MarkxusOption func(*MarkxusOptions)
 
 // Format should contains placeholder that will be filled with
 // these parameters in sequence:
@@ -43,21 +43,21 @@ type MarkxusOption func(*markxusOptions)
 //
 // Defaults to [[DefaultGenAiPromptFormat]]
 func WithPromptFormat(prompt string) MarkxusOption {
-	return func(mo *markxusOptions) {
-		mo.genAiPromptFormat = prompt
+	return func(mo *MarkxusOptions) {
+		mo.GenAiPromptFormat = prompt
 	}
 }
 
 // Defaults to [[DefaultGenAiModelName]]
 func WithModelName(model string) MarkxusOption {
-	return func(mo *markxusOptions) {
-		mo.genAiModelName = model
+	return func(mo *MarkxusOptions) {
+		mo.GenAiModelName = model
 	}
 }
 
 func WithGenAiApiKey(key string) MarkxusOption {
-	return func(mo *markxusOptions) {
-		mo.genAiApiKey = key
+	return func(mo *MarkxusOptions) {
+		mo.GenAiApiKey = key
 	}
 }
 
@@ -67,14 +67,14 @@ func WithGenAiApiKey(key string) MarkxusOption {
 //
 // Defaults to: [[DefaultUrlModPageFormat]]
 func WithUrlModPageFormat(format string) MarkxusOption {
-	return func(mo *markxusOptions) {
-		mo.urlModPageFormat = format
+	return func(mo *MarkxusOptions) {
+		mo.UrlModPageFormat = format
 	}
 }
 
 // Template will be exposed to [[nexus.SchemaMod]]
 func WithMarkdownHeaderTemplate(format *template.Template) MarkxusOption {
-	return func(mo *markxusOptions) {
-		mo.markdownHeaderTemplate = format
+	return func(mo *MarkxusOptions) {
+		mo.MarkdownHeaderTemplate = format
 	}
 }
