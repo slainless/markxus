@@ -1,4 +1,4 @@
-package cmd_init
+package init_
 
 import (
 	"github.com/slainless/markxus"
