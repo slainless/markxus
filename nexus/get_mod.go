@@ -8,7 +8,13 @@ import (
 )
 
 func (c *Client) GetMod(ctx context.Context, gameCode string, modId string) (*SchemaMod, error) {
-	raw, err := c.driver.Get(ctx, c.apiKey, fmt.Sprintf(c.urlGetModFormat, gameCode, modId))
+	raw, err := c.options.
+		Driver.Get(
+		ctx,
+		c.options.ApiKey,
+		fmt.Sprintf(c.options.UrlGetModFormat, gameCode, modId),
+	)
+
 	if err != nil {
 		return nil, err
 	}

@@ -5,26 +5,28 @@ import (
 )
 
 type Client struct {
-	driver HttpClient
-	apiKey string
-
-	urlGetModFormat string
+	options *ClientOptions
 }
 
 func NewClient(options ...ClientOption) (*Client, error) {
-	client := &Client{
-		urlGetModFormat: DefaultUrlGetModFormat,
-	}
-	for _, option := range options {
-		option(client)
+	clientOptions := &ClientOptions{
+		UrlGetModFormat: DefaultUrlGetModFormat,
 	}
 
-	if client.apiKey == "" {
+	for _, option := range options {
+		option(clientOptions)
+	}
+
+	if clientOptions.ApiKey == "" {
 		return nil, ErrorNoApiKey
 	}
 
-	if client.driver == nil {
+	if clientOptions.Driver == nil {
 		return nil, ErrorNoDriver
+	}
+
+	client := &Client{
+		options: clientOptions,
 	}
 
 	return client, nil
