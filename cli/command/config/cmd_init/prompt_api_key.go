@@ -13,12 +13,10 @@ func PromptApiKey(ctx context.Context) (ai string, nexus string, err error) {
 
 	form := huh.NewForm(
 		huh.NewGroup(
-			huh.NewInput().
-				Title("Nexus Mods API Key").
-				Value(&nexusKey),
-			huh.NewInput().
-				Title("Google Generative AI API Key").
-				Value(&aiKey),
+			huh.NewNote().
+				Description("These keys will be stored in OS keyring.\nYou can also set them via *markxus config set* command."),
+			huh.NewInput().Title("Nexus Mods").Value(&nexusKey).Placeholder("API Key"),
+			huh.NewInput().Title("Google Generative AI").Value(&aiKey).Placeholder("API Key"),
 		),
 	)
 

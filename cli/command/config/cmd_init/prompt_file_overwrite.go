@@ -12,7 +12,8 @@ func PromptFileOverwrite(ctx context.Context) (bool, error) {
 	form := huh.NewForm(
 		huh.NewGroup(
 			huh.NewConfirm().
-				Title("Config already exist, overwrite?").
+				Title("Config already exist").
+				Description("Overwrite?").
 				WithButtonAlignment(lipgloss.Left).
 				Value(&confirm),
 		),
