@@ -3,6 +3,9 @@ package cmd_init
 import (
 	"context"
 	"os"
+
+	"github.com/goccy/go-yaml"
+	"github.com/slainless/markxus/cli/markxus/config"
 )
 
 func writeConfig(ctx context.Context, configType string) error {
@@ -50,4 +53,24 @@ func writeToFile(path string) error {
 	}
 
 	return nil
+}
+
+func configPath(configType string) string {
+	switch configType {
+	case "global":
+		return config.GlobalConfigPath
+	case "local":
+		return config.LocalConfigPath
+	}
+
+	return ""
+}
+
+func createConfigData() ([]byte, error) {
+	data, err := yaml.MarshalWithOptions(defaultConfig(), yaml.UseLiteralStyleIfMultiline(true))
+	if err != nil {
+		return nil, err
+	}
+
+	return data, nil
 }

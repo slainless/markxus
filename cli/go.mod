@@ -3,9 +3,12 @@ module github.com/slainless/markxus/cli/markxus
 go 1.23.4
 
 require (
+	github.com/charmbracelet/huh v0.6.1-0.20241216182847-438e4f741435
+	github.com/charmbracelet/lipgloss v1.0.0
+	github.com/goccy/go-yaml v1.15.13
+	github.com/joho/godotenv v1.5.1
 	github.com/urfave/cli/v3 v3.0.0-beta1
 	github.com/zalando/go-keyring v0.2.6
-	gopkg.in/yaml.v3 v3.0.1
 )
 
 require (
@@ -23,8 +26,6 @@ require (
 	github.com/catppuccin/go v0.2.0 // indirect
 	github.com/charmbracelet/bubbles v0.20.0 // indirect
 	github.com/charmbracelet/bubbletea v1.2.5-0.20241205214244-9306010a31ee // indirect
-	github.com/charmbracelet/huh v0.6.1-0.20241216182847-438e4f741435 // indirect
-	github.com/charmbracelet/lipgloss v1.0.0 // indirect
 	github.com/charmbracelet/x/ansi v0.6.0 // indirect
 	github.com/charmbracelet/x/exp/strings v0.0.0-20241222104055-e1130b311607 // indirect
 	github.com/charmbracelet/x/term v0.2.1 // indirect
@@ -44,7 +45,6 @@ require (
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/googleapis/enterprise-certificate-proxy v0.3.2 // indirect
 	github.com/googleapis/gax-go/v2 v2.12.5 // indirect
-	github.com/joho/godotenv v1.5.1 // indirect
 	github.com/klauspost/cpuid/v2 v2.0.9 // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect

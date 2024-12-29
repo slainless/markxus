@@ -9,7 +9,6 @@ import (
 	"github.com/slainless/markxus/cli/markxus/config"
 	"github.com/slainless/markxus/cli/markxus/internal"
 	"github.com/urfave/cli/v3"
-	"gopkg.in/yaml.v3"
 )
 
 func action(ctx context.Context, c *cli.Command) error {
@@ -56,24 +55,4 @@ func action(ctx context.Context, c *cli.Command) error {
 	)
 
 	return err
-}
-
-func configPath(configType string) string {
-	switch configType {
-	case "global":
-		return config.GlobalConfigPath
-	case "local":
-		return config.LocalConfigPath
-	}
-
-	return ""
-}
-
-func createConfigData() ([]byte, error) {
-	data, err := yaml.Marshal(defaultConfig())
-	if err != nil {
-		return nil, err
-	}
-
-	return data, nil
 }
