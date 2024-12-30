@@ -6,8 +6,11 @@ import (
 )
 
 var Main = &cli.Command{
-	Name:  "Markxus CLI",
-	Usage: "LLM-powered markdown converter for Nexus Mods page",
+	Name:  "markxus",
+	Usage: "Markxus CLI, an LLM-powered markdown converter for Nexus Mods page",
+	Authors: []any{
+		"slainless",
+	},
 	Commands: []*cli.Command{
 		config.Command,
 	},
