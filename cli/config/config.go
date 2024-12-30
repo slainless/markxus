@@ -23,6 +23,7 @@ type MarkxusConfig struct {
 
 	Helper struct {
 		FallbackGameCode string
+		Interactive      bool
 	}
 }
 
@@ -37,6 +38,7 @@ var (
 	YamlKeyMarkxusUrlModPageFormat = "nexus_url_mod_page_format"
 	YamlKeyMarkdownHeaderFormat    = "markdown_header_format"
 	YamlKeyFallbackGameCode        = "fallback_game_code"
+	YamlKeyInteractive             = "interactive_cli"
 )
 
 var (
@@ -48,4 +50,37 @@ var (
 	EnvKeyMarkxusUrlModPageFormat = "NEXUS_URL_MOD_PAGE_FORMAT"
 	EnvKeyMarkdownHeaderFormat    = "MARKDOWN_HEADER_FORMAT"
 	EnvKeyFallbackGameCode        = "FALLBACK_GAME_CODE"
+	EnvKeyInteractive             = "INTERACTIVE_CLI"
 )
+
+var yamlToEnv = map[string]string{
+	YamlKeyGenAiApiKey:             EnvKeyGenAiApiKey,
+	YamlKeyGenAiModelName:          EnvKeyGenAiModelName,
+	YamlKeyMarkxusPromptFormat:     EnvKeyMarkxusPromptFormat,
+	YamlKeyNexusApiKey:             EnvKeyNexusApiKey,
+	YamlKeyNexusUrlGetModFormat:    EnvKeyNexusUrlGetModFormat,
+	YamlKeyMarkxusUrlModPageFormat: EnvKeyMarkxusUrlModPageFormat,
+	YamlKeyMarkdownHeaderFormat:    EnvKeyMarkdownHeaderFormat,
+	YamlKeyFallbackGameCode:        EnvKeyFallbackGameCode,
+	YamlKeyInteractive:             EnvKeyInteractive,
+}
+
+var envToYaml = map[string]string{
+	EnvKeyGenAiApiKey:             YamlKeyGenAiApiKey,
+	EnvKeyGenAiModelName:          YamlKeyGenAiModelName,
+	EnvKeyMarkxusPromptFormat:     YamlKeyMarkxusPromptFormat,
+	EnvKeyNexusApiKey:             YamlKeyNexusApiKey,
+	EnvKeyNexusUrlGetModFormat:    YamlKeyNexusUrlGetModFormat,
+	EnvKeyMarkxusUrlModPageFormat: YamlKeyMarkxusUrlModPageFormat,
+	EnvKeyMarkdownHeaderFormat:    YamlKeyMarkdownHeaderFormat,
+	EnvKeyFallbackGameCode:        YamlKeyFallbackGameCode,
+	EnvKeyInteractive:             YamlKeyInteractive,
+}
+
+func EnvToYaml(key string) string {
+	return envToYaml[key]
+}
+
+func YamlToEnv(key string) string {
+	return yamlToEnv[key]
+}

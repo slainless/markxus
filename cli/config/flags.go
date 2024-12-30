@@ -135,9 +135,23 @@ var (
 		Usage:       "Fallback game code to use when no game code supplied in args",
 
 		Sources: cli.NewValueSourceChain(
-			cli.EnvVar("FALLBACK_GAME_CODE"),
+			cli.EnvVar(EnvKeyFallbackGameCode),
 			cli.NewMapValueSource(YamlKeyFallbackGameCode, LocalYamlSource),
 			cli.NewMapValueSource(YamlKeyFallbackGameCode, GlobalYamlSource),
+		),
+	}
+
+	FlagInteractive = &cli.BoolFlag{
+		Name:        "interactive",
+		Aliases:     []string{"i"},
+		Destination: &Config.Helper.Interactive,
+		Category:    HelperCategory,
+		Usage:       "Allow interactive UI. Set to false to rely solely on command line flags and args",
+
+		Sources: cli.NewValueSourceChain(
+			cli.EnvVar(EnvKeyInteractive),
+			cli.NewMapValueSource(YamlKeyInteractive, LocalYamlSource),
+			cli.NewMapValueSource(YamlKeyInteractive, GlobalYamlSource),
 		),
 	}
 )
