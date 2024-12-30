@@ -20,7 +20,7 @@ var (
 
 		Sources: cli.NewValueSourceChain(
 			cli.EnvVar(EnvKeyGenAiApiKey),
-			cli.NewMapValueSource(YamlKeyGenAiApiKey, LocalYamlSource),
+			cli.NewMapValueSource(YamlKeyGenAiApiKey, YamlSourceLocal),
 			cli.NewMapValueSource(YamlKeyGenAiApiKey, KeyringSource),
 		),
 	}
@@ -35,8 +35,8 @@ var (
 
 		Sources: cli.NewValueSourceChain(
 			cli.EnvVar(EnvKeyGenAiModelName),
-			cli.NewMapValueSource(YamlKeyGenAiModelName, LocalYamlSource),
-			cli.NewMapValueSource(YamlKeyGenAiModelName, GlobalYamlSource),
+			cli.NewMapValueSource(YamlKeyGenAiModelName, YamlSourceLocal),
+			cli.NewMapValueSource(YamlKeyGenAiModelName, YamlSourceGlobal),
 		),
 	}
 
@@ -50,8 +50,8 @@ var (
 
 		Sources: cli.NewValueSourceChain(
 			cli.EnvVar(EnvKeyMarkxusPromptFormat),
-			cli.NewMapValueSource(YamlKeyMarkxusPromptFormat, LocalYamlSource),
-			cli.NewMapValueSource(YamlKeyMarkxusPromptFormat, GlobalYamlSource),
+			cli.NewMapValueSource(YamlKeyMarkxusPromptFormat, YamlSourceLocal),
+			cli.NewMapValueSource(YamlKeyMarkxusPromptFormat, YamlSourceGlobal),
 		),
 	}
 )
@@ -69,7 +69,7 @@ var (
 
 		Sources: cli.NewValueSourceChain(
 			cli.EnvVar(EnvKeyNexusApiKey),
-			cli.NewMapValueSource(YamlKeyNexusApiKey, LocalYamlSource),
+			cli.NewMapValueSource(YamlKeyNexusApiKey, YamlSourceLocal),
 			cli.NewMapValueSource(YamlKeyNexusApiKey, KeyringSource),
 		),
 	}
@@ -84,8 +84,8 @@ var (
 
 		Sources: cli.NewValueSourceChain(
 			cli.EnvVar(EnvKeyNexusUrlGetModFormat),
-			cli.NewMapValueSource(YamlKeyNexusUrlGetModFormat, LocalYamlSource),
-			cli.NewMapValueSource(YamlKeyNexusUrlGetModFormat, GlobalYamlSource),
+			cli.NewMapValueSource(YamlKeyNexusUrlGetModFormat, YamlSourceLocal),
+			cli.NewMapValueSource(YamlKeyNexusUrlGetModFormat, YamlSourceGlobal),
 		),
 	}
 
@@ -99,8 +99,8 @@ var (
 
 		Sources: cli.NewValueSourceChain(
 			cli.EnvVar(EnvKeyMarkxusUrlModPageFormat),
-			cli.NewMapValueSource(YamlKeyMarkxusUrlModPageFormat, LocalYamlSource),
-			cli.NewMapValueSource(YamlKeyMarkxusUrlModPageFormat, GlobalYamlSource),
+			cli.NewMapValueSource(YamlKeyMarkxusUrlModPageFormat, YamlSourceLocal),
+			cli.NewMapValueSource(YamlKeyMarkxusUrlModPageFormat, YamlSourceGlobal),
 		),
 	}
 )
@@ -118,8 +118,8 @@ var (
 
 		Sources: cli.NewValueSourceChain(
 			cli.EnvVar(EnvKeyMarkdownHeaderFormat),
-			cli.NewMapValueSource(YamlKeyMarkdownHeaderFormat, LocalYamlSource),
-			cli.NewMapValueSource(YamlKeyMarkdownHeaderFormat, GlobalYamlSource),
+			cli.NewMapValueSource(YamlKeyMarkdownHeaderFormat, YamlSourceLocal),
+			cli.NewMapValueSource(YamlKeyMarkdownHeaderFormat, YamlSourceGlobal),
 		),
 	}
 )
@@ -136,8 +136,8 @@ var (
 
 		Sources: cli.NewValueSourceChain(
 			cli.EnvVar(EnvKeyFallbackGameCode),
-			cli.NewMapValueSource(YamlKeyFallbackGameCode, LocalYamlSource),
-			cli.NewMapValueSource(YamlKeyFallbackGameCode, GlobalYamlSource),
+			cli.NewMapValueSource(YamlKeyFallbackGameCode, YamlSourceLocal),
+			cli.NewMapValueSource(YamlKeyFallbackGameCode, YamlSourceGlobal),
 		),
 	}
 )

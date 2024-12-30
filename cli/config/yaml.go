@@ -7,11 +7,15 @@ import (
 	"github.com/goccy/go-yaml"
 )
 
-var GlobalConfigPath string
-var LocalConfigPath string
+var (
+	ConfigPathGlobal string
+	ConfigPathLocal  string
+)
 
-var GlobalYamlSource KV
-var LocalYamlSource KV
+var (
+	YamlSourceGlobal KV
+	YamlSourceLocal  KV
+)
 
 func init() {
 	home, err := os.UserHomeDir()
@@ -24,16 +28,16 @@ func init() {
 		panic(err)
 	}
 
-	GlobalConfigPath = path.Join(home, ".markxus.yml")
-	LocalConfigPath = path.Join(cwd, ".markxus.yml")
+	ConfigPathGlobal = path.Join(home, ".markxus.yml")
+	ConfigPathLocal = path.Join(cwd, ".markxus.yml")
 
-	GlobalYamlSource = NewYamlSource(GlobalConfigPath)
-	LocalYamlSource = NewYamlSource(LocalConfigPath)
+	YamlSourceGlobal = NewYamlSource(ConfigPathGlobal)
+	YamlSourceLocal = NewYamlSource(ConfigPathLocal)
 }
 
 func NewYamlSource(path string) KV {
 	kv := KV{}
-	config, err := os.ReadFile(GlobalConfigPath)
+	config, err := os.ReadFile(ConfigPathGlobal)
 	if err != nil {
 		return kv
 	}
@@ -45,9 +49,9 @@ func NewYamlSource(path string) KV {
 func ConfigPath(configType ConfigType) string {
 	switch configType {
 	case ConfigTypeGlobal:
-		return GlobalConfigPath
+		return ConfigPathGlobal
 	case ConfigTypeLocal:
-		return LocalConfigPath
+		return ConfigPathLocal
 	}
 
 	return ""
