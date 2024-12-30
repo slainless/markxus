@@ -17,7 +17,8 @@ func CreateDefaultConfig() map[string]any {
 	kv[YamlKeyNexusUrlGetModFormat] = nexus.DefaultUrlGetModFormat
 	kv[YamlKeyMarkxusUrlModPageFormat] = markxus.DefaultUrlModPageFormat
 	kv[YamlKeyMarkdownHeaderFormat] = markxus.DefaultMarkdownHeaderFormat
-	kv[YamlKeyOutputDir] = "."
+	kv[YamlKeyOutputDir] = FlagOutputDir.Value
+	kv[YamlKeyOverwriteOutput] = FlagOverwriteOutput.Value
 
 	return kv
 }

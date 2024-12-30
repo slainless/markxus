@@ -52,6 +52,7 @@ var (
 	YamlKeyMarkdownHeaderFormat    = "markdown_header_format"
 	YamlKeyFallbackGameCode        = "fallback_game_code"
 	YamlKeyOutputDir               = "output_dir"
+	YamlKeyOverwriteOutput         = "overwrite_output"
 )
 
 var (
@@ -64,6 +65,7 @@ var (
 	EnvKeyMarkdownHeaderFormat    = "MARKDOWN_HEADER_FORMAT"
 	EnvKeyFallbackGameCode        = "FALLBACK_GAME_CODE"
 	EnvKeyOutputDir               = "OUTPUT_DIR"
+	EnvKeyOverwriteOutput         = "OVERWRITE_OUTPUT"
 )
 
 var yamlToEnv = map[string]string{
@@ -75,6 +77,8 @@ var yamlToEnv = map[string]string{
 	YamlKeyMarkxusUrlModPageFormat: EnvKeyMarkxusUrlModPageFormat,
 	YamlKeyMarkdownHeaderFormat:    EnvKeyMarkdownHeaderFormat,
 	YamlKeyFallbackGameCode:        EnvKeyFallbackGameCode,
+	YamlKeyOutputDir:               EnvKeyOutputDir,
+	YamlKeyOverwriteOutput:         EnvKeyOverwriteOutput,
 }
 
 var envToYaml = map[string]string{
@@ -86,6 +90,8 @@ var envToYaml = map[string]string{
 	EnvKeyMarkxusUrlModPageFormat: YamlKeyMarkxusUrlModPageFormat,
 	EnvKeyMarkdownHeaderFormat:    YamlKeyMarkdownHeaderFormat,
 	EnvKeyFallbackGameCode:        YamlKeyFallbackGameCode,
+	EnvKeyOutputDir:               YamlKeyOutputDir,
+	EnvKeyOverwriteOutput:         YamlKeyOverwriteOutput,
 }
 
 func EnvToYaml(key string) string {
@@ -96,7 +102,7 @@ func YamlToEnv(key string) string {
 	return yamlToEnv[key]
 }
 
-func Resolve(envKey string) string {
+func Resolve(envKey string) any {
 	switch envKey {
 	case EnvKeyGenAiApiKey:
 		return Config.GenAi.ApiKey
@@ -114,9 +120,13 @@ func Resolve(envKey string) string {
 		return Config.Generation.HeaderFormat
 	case EnvKeyFallbackGameCode:
 		return Config.Helper.FallbackGameCode
+	case EnvKeyOutputDir:
+		return Config.Generation.OutputDir
+	case EnvKeyOverwriteOutput:
+		return Config.Common.Overwrite
 	}
 
-	return ""
+	return nil
 }
 
 type ConfigType string

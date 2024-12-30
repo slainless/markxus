@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/slainless/markxus/cli/markxus/command/config/internal"
+	"github.com/slainless/markxus/cli/markxus/config"
 	"github.com/slainless/markxus/cli/markxus/internal/fs"
 	"github.com/slainless/markxus/cli/markxus/internal/style"
 	"github.com/urfave/cli/v3"
@@ -27,7 +28,7 @@ func action(ctx context.Context, c *cli.Command) error {
 			return fmt.Errorf("config file not found.\nInit first with *markxus config init -t %s*", configType)
 		}
 
-		err := internal.WriteToFile(configPath, internal.CreateDefaultConfig())
+		err := internal.WriteToFile(configPath, config.CreateDefaultConfig())
 		if err != nil {
 			return err
 		}

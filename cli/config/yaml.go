@@ -28,7 +28,7 @@ var ConfigPathLocal = (func() string {
 var YamlSourceGlobal, YamlSourceGlobalError = NewYamlSource(ConfigPathGlobal)
 var YamlSourceLocal, YamlSourceLocalError = NewYamlSource(ConfigPathGlobal)
 
-func ResolveFromYaml(configType ConfigType, yamlKey string) string {
+func ResolveFromYaml(configType ConfigType, yamlKey string) any {
 	var kv KV
 	if configType == ConfigTypeGlobal {
 		kv = YamlSourceGlobal
@@ -36,12 +36,7 @@ func ResolveFromYaml(configType ConfigType, yamlKey string) string {
 		kv = YamlSourceLocal
 	}
 
-	val, ok := kv[yamlKey].(string)
-	if !ok {
-		return ""
-	}
-
-	return val
+	return kv[yamlKey]
 }
 
 func NewYamlSource(path string) (KV, error) {

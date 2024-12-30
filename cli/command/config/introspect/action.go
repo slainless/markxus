@@ -63,6 +63,8 @@ func action(ctx context.Context, c *cli.Command) error {
 	vars.WriteString(createVarEntry(configType, config.YamlKeyNexusUrlGetModFormat, theme) + "\n\n")
 	vars.WriteString(createVarEntry(configType, config.YamlKeyMarkxusUrlModPageFormat, theme) + "\n\n")
 	vars.WriteString(createVarEntry(configType, config.YamlKeyMarkdownHeaderFormat, theme) + "\n\n")
+	vars.WriteString(createVarEntry(configType, config.YamlKeyOutputDir, theme) + "\n\n")
+	vars.WriteString(createVarEntry(configType, config.YamlKeyOverwriteOutput, theme) + "\n\n")
 	vars.WriteString(createVarEntry(configType, config.YamlKeyFallbackGameCode, theme))
 
 	fmt.Println(style.Card().Render(header.String()))
@@ -72,7 +74,7 @@ func action(ctx context.Context, c *cli.Command) error {
 }
 
 func createVarEntry(configType config.ConfigType, yamlKey string, theme *huh.Theme) string {
-	var value string
+	var value any
 	if configType == "" {
 		value = config.Resolve(config.YamlToEnv(yamlKey))
 	} else {
@@ -80,10 +82,10 @@ func createVarEntry(configType config.ConfigType, yamlKey string, theme *huh.The
 	}
 
 	var v string
-	if value == "" {
+	if value == nil || value == "" {
 		v = theme.Blurred.TextInput.Placeholder.Render("(empty)")
 	} else {
-		v = theme.Focused.Description.Render(value)
+		v = theme.Focused.Description.Render(fmt.Sprint(v))
 	}
 
 	return fmt.Sprintf(

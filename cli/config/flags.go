@@ -158,14 +158,16 @@ var (
 )
 
 var (
-	FlagOverwrite = &cli.BoolFlag{
+	FlagOverwriteOutput = &cli.BoolFlag{
 		Name:        "overwrite",
 		Aliases:     []string{"w"},
-		Usage:       "Overwrite file if exist",
+		Usage:       "Overwrite existing markdown if exist",
 		Value:       false,
 		Destination: &Config.Common.Overwrite,
 		Sources: cli.NewValueSourceChain(
-			cli.EnvVar("OVERWRITE"),
+			cli.EnvVar(EnvKeyOverwriteOutput),
+			cli.NewMapValueSource(YamlKeyFallbackGameCode, YamlSourceLocal),
+			cli.NewMapValueSource(YamlKeyFallbackGameCode, YamlSourceGlobal),
 		),
 	}
 
@@ -190,6 +192,6 @@ var AllFlags = []cli.Flag{
 	FlagMarkxusUrlModPageFormat,
 	FlagMarkdownHeaderFormat,
 	FlagFallbackGameCode,
-	FlagOverwrite,
+	FlagOverwriteOutput,
 	FlagConfigType,
 }

@@ -21,5 +21,7 @@ var Command = &cli.Command{
 		config.FlagNexusUrlGetModFormat,
 		config.FlagMarkxusUrlModPageFormat,
 		config.FlagMarkdownHeaderFormat,
+		config.FlagOutputDir,
+		config.FlagOverwriteOutput,
 	},
 }
