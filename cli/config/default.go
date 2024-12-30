@@ -19,6 +19,7 @@ func CreateDefaultConfig() map[string]any {
 	kv[YamlKeyMarkdownHeaderFormat] = markxus.DefaultMarkdownHeaderFormat
 	kv[YamlKeyOutputDir] = FlagOutputDir.Value
 	kv[YamlKeyOverwriteOutput] = FlagOverwriteOutput.Value
+	kv[YamlKeyFallbackGameCode] = ""
 
 	return kv
 }
