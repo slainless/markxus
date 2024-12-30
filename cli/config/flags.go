@@ -140,27 +140,13 @@ var (
 			cli.NewMapValueSource(YamlKeyFallbackGameCode, GlobalYamlSource),
 		),
 	}
-
-	FlagInteractive = &cli.BoolFlag{
-		Name:        "interactive",
-		Aliases:     []string{"i"},
-		Destination: &Config.Helper.Interactive,
-		Category:    HelperCategory,
-		Usage:       "Allow interactive UI. Set to false to rely solely on command line flags and args",
-		Value:       true,
-		Sources: cli.NewValueSourceChain(
-			cli.EnvVar(EnvKeyInteractive),
-			cli.NewMapValueSource(YamlKeyInteractive, LocalYamlSource),
-			cli.NewMapValueSource(YamlKeyInteractive, GlobalYamlSource),
-		),
-	}
 )
 
 var (
 	FlagOverwrite = &cli.BoolFlag{
 		Name:        "overwrite",
 		Aliases:     []string{"w"},
-		Usage:       "Overwrite file if exist (Non-interactive)",
+		Usage:       "Overwrite file if exist",
 		Value:       false,
 		Destination: &Config.Common.Overwrite,
 		Sources: cli.NewValueSourceChain(
@@ -171,7 +157,7 @@ var (
 	FlagConfigType = &cli.GenericFlag{
 		Name:        "type",
 		Aliases:     []string{"t"},
-		Usage:       "Config type to be used, either global or local (Non-interactive)",
+		Usage:       "Config type to be used, either global or local",
 		DefaultText: "global",
 		Value:       &Config.Common.ConfigType,
 		Sources: cli.NewValueSourceChain(
@@ -189,4 +175,6 @@ var AllFlags = []cli.Flag{
 	FlagMarkxusUrlModPageFormat,
 	FlagMarkdownHeaderFormat,
 	FlagFallbackGameCode,
+	FlagOverwrite,
+	FlagConfigType,
 }

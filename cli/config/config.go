@@ -50,7 +50,6 @@ var (
 	YamlKeyMarkxusUrlModPageFormat = "nexus_url_mod_page_format"
 	YamlKeyMarkdownHeaderFormat    = "markdown_header_format"
 	YamlKeyFallbackGameCode        = "fallback_game_code"
-	YamlKeyInteractive             = "interactive_cli"
 )
 
 var (
@@ -62,7 +61,6 @@ var (
 	EnvKeyMarkxusUrlModPageFormat = "NEXUS_URL_MOD_PAGE_FORMAT"
 	EnvKeyMarkdownHeaderFormat    = "MARKDOWN_HEADER_FORMAT"
 	EnvKeyFallbackGameCode        = "FALLBACK_GAME_CODE"
-	EnvKeyInteractive             = "INTERACTIVE_CLI"
 )
 
 var yamlToEnv = map[string]string{
@@ -74,7 +72,6 @@ var yamlToEnv = map[string]string{
 	YamlKeyMarkxusUrlModPageFormat: EnvKeyMarkxusUrlModPageFormat,
 	YamlKeyMarkdownHeaderFormat:    EnvKeyMarkdownHeaderFormat,
 	YamlKeyFallbackGameCode:        EnvKeyFallbackGameCode,
-	YamlKeyInteractive:             EnvKeyInteractive,
 }
 
 var envToYaml = map[string]string{
@@ -86,7 +83,6 @@ var envToYaml = map[string]string{
 	EnvKeyMarkxusUrlModPageFormat: YamlKeyMarkxusUrlModPageFormat,
 	EnvKeyMarkdownHeaderFormat:    YamlKeyMarkdownHeaderFormat,
 	EnvKeyFallbackGameCode:        YamlKeyFallbackGameCode,
-	EnvKeyInteractive:             YamlKeyInteractive,
 }
 
 func EnvToYaml(key string) string {
