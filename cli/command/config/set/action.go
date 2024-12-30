@@ -19,6 +19,7 @@ func action(ctx context.Context, c *cli.Command) error {
 		return err
 	}
 
+	var previousValue string
 	useKeyring := yamlKey == config.YamlKeyGenAiApiKey || yamlKey == config.YamlKeyNexusApiKey
 	if useKeyring {
 		err = config.SetKeyring(yamlKey, value)
@@ -35,6 +36,10 @@ func action(ctx context.Context, c *cli.Command) error {
 			return err
 		}
 		defer handle.Close()
+
+		if data[yamlKey] != nil {
+			previousValue = fmt.Sprint(data[yamlKey])
+		}
 
 		data[yamlKey] = value
 		err = internal.WriteToHandle(handle, data)
@@ -53,11 +58,23 @@ func action(ctx context.Context, c *cli.Command) error {
 	theme := style.GetTheme()
 	var cardContent strings.Builder
 	fmt.Fprintf(&cardContent,
-		lipgloss.NewStyle().Render("Config type - %s\nKey - %s\nValue\n%s\n\nKey has been set."),
+		lipgloss.NewStyle().Render("Config type - %s\nKey - %s\n\n"),
 		theme.Focused.Description.Render(displayConfigType),
 		theme.Focused.Card.Render(theme.Focused.Description.Render(yamlKey)),
+	)
+
+	if previousValue != "" {
+		fmt.Fprintf(&cardContent,
+			lipgloss.NewStyle().Render("Previous value\n%s\n"),
+			theme.Focused.Card.Render(theme.Focused.Description.Render(previousValue)),
+		)
+	}
+
+	fmt.Fprintf(&cardContent,
+		lipgloss.NewStyle().Render("New value\n%s\n\n"),
 		theme.Focused.Card.Render(theme.Focused.Description.Render(value)),
 	)
+	cardContent.WriteString("Key has been set.")
 
 	fmt.Println(style.Card().Render(cardContent.String()))
 	return nil
