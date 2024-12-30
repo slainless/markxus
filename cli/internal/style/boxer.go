@@ -9,7 +9,7 @@ func Card(theme ...*huh.Theme) lipgloss.Style {
 	t := GetTheme(theme...)
 	return lipgloss.NewStyle().
 		Padding(1, 2).
-		Width(40).
+		Width(60).
 		Border(lipgloss.RoundedBorder()).
 		BorderForeground(t.FieldSeparator.GetForeground())
 }
