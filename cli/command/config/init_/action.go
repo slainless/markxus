@@ -16,7 +16,7 @@ import (
 func action(ctx context.Context, c *cli.Command) error {
 	configType := internal.ConfigType()
 
-	err := internal.WriteFileWithCheck(configType, internal.CreateDefaultConfig())
+	err := internal.WriteFileWithCheck(configType, config.CreateDefaultConfig())
 	if err != nil {
 		return err
 	}

@@ -19,6 +19,7 @@ type MarkxusConfig struct {
 
 	Generation struct {
 		HeaderFormat string
+		OutputDir    string
 	}
 
 	Helper struct {
@@ -50,6 +51,7 @@ var (
 	YamlKeyMarkxusUrlModPageFormat = "nexus_url_mod_page_format"
 	YamlKeyMarkdownHeaderFormat    = "markdown_header_format"
 	YamlKeyFallbackGameCode        = "fallback_game_code"
+	YamlKeyOutputDir               = "output_dir"
 )
 
 var (
@@ -61,6 +63,7 @@ var (
 	EnvKeyMarkxusUrlModPageFormat = "NEXUS_URL_MOD_PAGE_FORMAT"
 	EnvKeyMarkdownHeaderFormat    = "MARKDOWN_HEADER_FORMAT"
 	EnvKeyFallbackGameCode        = "FALLBACK_GAME_CODE"
+	EnvKeyOutputDir               = "OUTPUT_DIR"
 )
 
 var yamlToEnv = map[string]string{

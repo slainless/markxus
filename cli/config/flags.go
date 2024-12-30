@@ -122,6 +122,21 @@ var (
 			cli.NewMapValueSource(YamlKeyMarkdownHeaderFormat, YamlSourceGlobal),
 		),
 	}
+
+	FlagOutputDir = &cli.StringFlag{
+		Name:        "output-dir",
+		Aliases:     []string{"outdir", "o"},
+		Destination: &Config.Generation.OutputDir,
+		Category:    GenerationCategory,
+		Usage:       "Output directory for markdown files",
+		Value:       ".",
+
+		Sources: cli.NewValueSourceChain(
+			cli.EnvVar(EnvKeyOutputDir),
+			cli.NewMapValueSource(YamlKeyOutputDir, YamlSourceLocal),
+			cli.NewMapValueSource(YamlKeyOutputDir, YamlSourceGlobal),
+		),
+	}
 )
 
 var (
