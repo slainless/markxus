@@ -17,10 +17,28 @@ type Generated struct {
 	Error   error
 }
 
-func (c *Markxus) Generate(ctx context.Context, gameCode string, modId string) (*Generated, error) {
+func (c *Markxus) Generate(
+	ctx context.Context,
+	gameCode string,
+	modId string,
+	options ...GenerationContextOption,
+) (*Generated, error) {
+	generationCtx := &GenerationContext{}
+
+	for _, option := range options {
+		option(generationCtx)
+	}
+
 	mod, err := c.nexus.GetMod(ctx, gameCode, modId)
 	if err != nil {
 		return nil, err
+	}
+
+	if generationCtx.OnModFetched != nil {
+		err := generationCtx.OnModFetched(ctx, mod)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	mod.PageUrl = fmt.Sprintf(c.options.UrlModPageFormat, gameCode, modId)
@@ -33,8 +51,15 @@ func (c *Markxus) Generate(ctx context.Context, gameCode string, modId string) (
 		return nil, err
 	}
 
+	if generationCtx.OnHeaderCreated != nil {
+		err := generationCtx.OnHeaderCreated(ctx, header)
+		if err != nil {
+			return nil, err
+		}
+	}
+
 	prompt := fmt.Sprintf(c.options.GenAiPromptFormat, mod.Description)
-	output, err := c.llm.Send(ctx, prompt, mod)
+	output, err := c.llm.Send(ctx, prompt, mod, generationCtx.OnLlmStreamConsuming)
 	if len(output) < 1 {
 		return nil, err
 	}

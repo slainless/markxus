@@ -21,5 +21,12 @@ type LlmClient interface {
 	// in case max token limit hit. In this case, the Gen AI client
 	// must manually send "continue" prompt and append the next response
 	// batch to the result.
-	Send(ctx context.Context, prompt string, mod *nexus.SchemaMod) (string, error)
+	Send(
+		ctx context.Context,
+		prompt string,
+		mod *nexus.SchemaMod,
+		onStreamConsume LlmStreamConsumeHook,
+	) (string, error)
 }
+
+type LlmStreamConsumeHook func(ctx context.Context, streamData any, currentOutput *string) error
