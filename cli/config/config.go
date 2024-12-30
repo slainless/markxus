@@ -93,6 +93,29 @@ func YamlToEnv(key string) string {
 	return yamlToEnv[key]
 }
 
+func Resolve(envKey string) string {
+	switch envKey {
+	case EnvKeyGenAiApiKey:
+		return Config.GenAi.ApiKey
+	case EnvKeyGenAiModelName:
+		return Config.GenAi.ModelName
+	case EnvKeyMarkxusPromptFormat:
+		return Config.GenAi.Prompt
+	case EnvKeyNexusApiKey:
+		return Config.Nexus.ApiKey
+	case EnvKeyNexusUrlGetModFormat:
+		return Config.Nexus.Url.GetModFormat
+	case EnvKeyMarkxusUrlModPageFormat:
+		return Config.Nexus.Url.ModPageFormat
+	case EnvKeyMarkdownHeaderFormat:
+		return Config.Generation.HeaderFormat
+	case EnvKeyFallbackGameCode:
+		return Config.Helper.FallbackGameCode
+	}
+
+	return ""
+}
+
 type ConfigType string
 
 var (
