@@ -3,10 +3,12 @@ package edit
 import (
 	"context"
 	"fmt"
+	"os"
 	"os/exec"
 	"runtime"
 
 	"github.com/slainless/markxus/cli/markxus/command/config/internal"
+	"github.com/slainless/markxus/cli/markxus/internal/fs"
 	"github.com/slainless/markxus/cli/markxus/internal/style"
 	"github.com/urfave/cli/v3"
 )
@@ -15,7 +17,7 @@ func action(ctx context.Context, c *cli.Command) error {
 	configType := internal.ConfigType()
 	configPath := internal.ConfigPath(configType)
 
-	exist, err := isConfigExist(configType)
+	stat, exist, err := fs.IsFileExist(configType)
 	if err != nil {
 		return err
 	}
@@ -28,6 +30,11 @@ func action(ctx context.Context, c *cli.Command) error {
 		err := internal.WriteToFile(configPath, internal.CreateDefaultConfig())
 		if err != nil {
 			return err
+		}
+	} else {
+		mode := stat.Mode()
+		if mode&os.ModePerm == 0 || (mode&0400 == 0 && mode&0040 == 0) {
+			return fmt.Errorf("no permission to read:\n%s", configPath)
 		}
 	}
 
