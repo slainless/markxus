@@ -36,10 +36,12 @@ go install github.com/slainless/markxus/cli/markxus@latest
 
 ### Configuration
 
+#### Initialization
+
 Most of the functionality of the apps relies on API key of Nexus Mods and Google Generative AI so 
 it is important to set up global configuration (or local configuration) or both vars will need to be supplied to the binary per usage.
 
-To initiate global (or local) configuration, run:
+To initialize global (or local) configuration, run:
 
 ```sh
 markxus config init
@@ -49,21 +51,53 @@ It will create `.markxus.yaml` to user directory (or cwd, depending on config ty
 It is recommended to store the API key in OS-managed credential storage rather
 than disk.
 
+Edit command can also be used to initialize the file then directly open file editor against the config, by running:
+
+```sh
+markxus config edit -i
+```
+
 To change API key later without going through config init, run:
 
 ```sh
-markxus config set NEXUS_API_KEY $new_key
+markxus config set NEXUS_API_KEY <new_key>
 ```
 
 or
 
 ```sh
-markxus config set GEN_AI_API_KEY $new_key
+markxus config set GEN_AI_API_KEY <new_key>
 ```
 
 Command flags is available to `config init` to alter its behaviour:
-- `--force` or `FORCE_OVERWRITE`: Force overwrite to file if exist, skipping prompt
-- `--type` or `FORCE_CONFIG_TYPE`: Set config type, whether to generate to `global` or `local` (cwd)
+- `--force` or `FORCE_OVERWRITE`: Force overwrite to file if exist
+- `--type` or `CONFIG_TYPE`: Set config type, whether to generate to `global` or `local` (cwd)
+
+#### Changing configuration
+
+`config edit` can be used to open file editor for the config, using OS preferred text editor:
+
+```sh
+markxus config edit
+```
+
+Command flags is available to `config edit` to alter its behaviour:
+- `--i` or `INIT_CONFIG`: Initialize config if not exist
+- `--type` or `CONFIG_TYPE`: Set config type, whether to edit `global` or `local` config (cwd)
+
+Individual config key can also be set using:
+
+```sh
+markxus config set <yaml_or_env_key> <value>
+```
+
+Must be noted, however, that `NEXUS_API_KEY` and `GEN_AI_API_KEY` cannot be set to config via this command
+and must be edited manually. Setting either field will configure OS credential storage instead of config 
+(and obviously, `--type` will be ignored when setting either fields). 
+
+Command flags is available to `config set` to alter its behaviour:
+- `--type` or `CONFIG_TYPE`: Set config type, whether to set value to `global` or `local` config (cwd)
+
 
 #### Available Options
 
@@ -139,7 +173,7 @@ All these options can also be set from env vars or CLI flag.
 
 	`https://nexusmods.com/%v/mods/%v`
 
-#### Generation
+##### Generation
 
 - **Markdown header format** 
 
@@ -153,7 +187,7 @@ All these options can also be set from env vars or CLI flag.
 
 	Header can be used to alter the resulting header of the markdown, in particular, in how the frontmatter is generated.
 
-#### Helper
+##### Helper
 
 - **Fallback game code**
 
