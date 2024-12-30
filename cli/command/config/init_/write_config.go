@@ -1,14 +1,14 @@
 package init_
 
 import (
-	"context"
+	"fmt"
 	"os"
 
 	"github.com/goccy/go-yaml"
 	"github.com/slainless/markxus/cli/markxus/config"
 )
 
-func writeConfig(ctx context.Context, configType string) error {
+func writeConfig(configType config.ConfigType) error {
 	handle, err := os.OpenFile(configPath(configType), os.O_WRONLY, 0600)
 	if os.IsNotExist(err) {
 		return writeToFile(configPath(configType))
@@ -18,13 +18,8 @@ func writeConfig(ctx context.Context, configType string) error {
 
 	defer handle.Close()
 
-	overwrite, err := PromptFileOverwrite(ctx)
-	if err != nil {
-		return err
-	}
-
-	if !overwrite {
-		return nil
+	if !config.Config.Common.Overwrite {
+		return fmt.Errorf("config already exists!\nuse --overwrite to overwrite it")
 	}
 
 	err = handle.Truncate(0)
@@ -55,11 +50,11 @@ func writeToFile(path string) error {
 	return nil
 }
 
-func configPath(configType string) string {
+func configPath(configType config.ConfigType) string {
 	switch configType {
-	case "global":
+	case config.ConfigTypeGlobal:
 		return config.GlobalConfigPath
-	case "local":
+	case config.ConfigTypeLocal:
 		return config.LocalConfigPath
 	}
 

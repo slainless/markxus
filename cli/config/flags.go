@@ -147,11 +147,35 @@ var (
 		Destination: &Config.Helper.Interactive,
 		Category:    HelperCategory,
 		Usage:       "Allow interactive UI. Set to false to rely solely on command line flags and args",
-
+		Value:       true,
 		Sources: cli.NewValueSourceChain(
 			cli.EnvVar(EnvKeyInteractive),
 			cli.NewMapValueSource(YamlKeyInteractive, LocalYamlSource),
 			cli.NewMapValueSource(YamlKeyInteractive, GlobalYamlSource),
+		),
+	}
+)
+
+var (
+	FlagOverwrite = &cli.BoolFlag{
+		Name:        "overwrite",
+		Aliases:     []string{"w"},
+		Usage:       "Overwrite file if exist (Non-interactive)",
+		Value:       false,
+		Destination: &Config.Common.Overwrite,
+		Sources: cli.NewValueSourceChain(
+			cli.EnvVar("OVERWRITE"),
+		),
+	}
+
+	FlagConfigType = &cli.GenericFlag{
+		Name:        "type",
+		Aliases:     []string{"t"},
+		Usage:       "Config type to be used, either global or local (Non-interactive)",
+		DefaultText: "global",
+		Value:       &Config.Common.ConfigType,
+		Sources: cli.NewValueSourceChain(
+			cli.EnvVar("CONFIG_TYPE"),
 		),
 	}
 )
@@ -164,4 +188,5 @@ var AllFlags = []cli.Flag{
 	FlagNexusUrlGetModFormat,
 	FlagMarkxusUrlModPageFormat,
 	FlagMarkdownHeaderFormat,
+	FlagFallbackGameCode,
 }

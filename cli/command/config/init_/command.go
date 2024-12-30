@@ -1,14 +1,17 @@
 package init_
 
-import "github.com/urfave/cli/v3"
+import (
+	"github.com/slainless/markxus/cli/markxus/config"
+	"github.com/urfave/cli/v3"
+)
 
 var Command = &cli.Command{
-	Name: "init",
+	Name:    "init",
+	Aliases: []string{"i"},
 	Flags: []cli.Flag{
-		flagForce,
-		flagType,
+		config.FlagOverwrite,
+		config.FlagConfigType,
 	},
-	Usage:     "Initialize config file",
-	ArgsUsage: `"global" | "local" | empty (defaults to "local")`,
-	Action:    action,
+	Usage:  "Initialize config file",
+	Action: action,
 }

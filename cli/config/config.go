@@ -25,9 +25,21 @@ type MarkxusConfig struct {
 		FallbackGameCode string
 		Interactive      bool
 	}
+
+	Common struct {
+		ConfigType EnumValue[ConfigType]
+		Overwrite  bool
+	}
 }
 
 var Config MarkxusConfig
+
+func init() {
+	Config.Common.ConfigType = EnumValue[ConfigType]{
+		Enum:    []ConfigType{ConfigTypeGlobal, ConfigTypeLocal},
+		Default: ConfigTypeGlobal,
+	}
+}
 
 var (
 	YamlKeyGenAiApiKey             = "genai_api_key"
@@ -84,3 +96,10 @@ func EnvToYaml(key string) string {
 func YamlToEnv(key string) string {
 	return yamlToEnv[key]
 }
+
+type ConfigType string
+
+var (
+	ConfigTypeGlobal ConfigType = "global"
+	ConfigTypeLocal  ConfigType = "local"
+)

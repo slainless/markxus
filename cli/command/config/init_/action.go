@@ -12,16 +12,9 @@ import (
 )
 
 func action(ctx context.Context, c *cli.Command) error {
-	if initConfig.force {
-		return writeToFile(configPath(initConfig.configType.String()))
-	}
+	configType := config.Config.Common.ConfigType.Selected()
 
-	configType, err := PromptConfigType(ctx)
-	if err != nil {
-		return err
-	}
-
-	err = writeConfig(ctx, configType)
+	err := writeConfig(configType)
 	if err != nil {
 		return err
 	}
@@ -31,15 +24,17 @@ func action(ctx context.Context, c *cli.Command) error {
 		return err
 	}
 
-	_ = config.SetKeyring(config.YamlKeyGenAiApiKey, aiKey)
-	_ = config.SetKeyring(config.YamlKeyNexusApiKey, nexusKey)
+	if aiKey != "" && nexusKey != "" {
+		_ = config.SetKeyring(config.YamlKeyGenAiApiKey, aiKey)
+		_ = config.SetKeyring(config.YamlKeyNexusApiKey, nexusKey)
+	}
 
 	theme := style.GetTheme()
 	var cardContent strings.Builder
 	fmt.Fprintf(&cardContent,
 		lipgloss.NewStyle().
 			Render("Config type - %s\nPath\n%s\n\nConfiguration has been initiated."),
-		theme.Focused.Description.Render(configType),
+		theme.Focused.Description.Render(string(configType)),
 		theme.Focused.Card.Render(
 			theme.Focused.Description.Render(configPath(configType)),
 		),
