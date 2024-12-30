@@ -21,6 +21,7 @@ var (
 		Sources: cli.NewValueSourceChain(
 			cli.EnvVar(EnvKeyGenAiApiKey),
 			cli.NewMapValueSource(YamlKeyGenAiApiKey, YamlSourceLocal),
+			cli.NewMapValueSource(YamlKeyGenAiApiKey, YamlSourceGlobal),
 			cli.NewMapValueSource(YamlKeyGenAiApiKey, KeyringSource),
 		),
 	}
@@ -70,6 +71,7 @@ var (
 		Sources: cli.NewValueSourceChain(
 			cli.EnvVar(EnvKeyNexusApiKey),
 			cli.NewMapValueSource(YamlKeyNexusApiKey, YamlSourceLocal),
+			cli.NewMapValueSource(YamlKeyGenAiApiKey, YamlSourceGlobal),
 			cli.NewMapValueSource(YamlKeyNexusApiKey, KeyringSource),
 		),
 	}
