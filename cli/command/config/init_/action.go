@@ -49,9 +49,7 @@ func action(ctx context.Context, c *cli.Command) error {
 		lipgloss.NewStyle().
 			Render("Config type - %s\nPath\n%s\n\nConfiguration has been initialized."),
 		theme.Focused.Description.Render(string(configType)),
-		theme.Focused.Card.Render(
-			theme.Focused.Description.Render(config.ConfigPath(configType)),
-		),
+		theme.Focused.Description.Render(config.ConfigPath(configType)),
 	)
 
 	fmt.Println(style.Card().Render(cardContent.String()))

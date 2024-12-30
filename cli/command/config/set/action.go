@@ -66,13 +66,13 @@ func action(ctx context.Context, c *cli.Command) error {
 	if previousValue != "" {
 		fmt.Fprintf(&cardContent,
 			lipgloss.NewStyle().Render("Previous value\n%s\n"),
-			theme.Focused.Card.Render(theme.Focused.Description.Render(previousValue)),
+			theme.Focused.Description.Render(previousValue),
 		)
 	}
 
 	fmt.Fprintf(&cardContent,
 		lipgloss.NewStyle().Render("New value\n%s\n\n"),
-		theme.Focused.Card.Render(theme.Focused.Description.Render(value)),
+		theme.Focused.Description.Render(value),
 	)
 	cardContent.WriteString("Key has been set.")
 
