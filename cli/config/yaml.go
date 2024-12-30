@@ -7,43 +7,52 @@ import (
 	"github.com/goccy/go-yaml"
 )
 
-var (
-	ConfigPathGlobal string
-	ConfigPathLocal  string
-)
-
-var (
-	YamlSourceGlobal KV
-	YamlSourceLocal  KV
-)
-
-func init() {
+var ConfigPathGlobal = (func() string {
 	home, err := os.UserHomeDir()
 	if err != nil {
 		panic(err)
 	}
 
+	return path.Join(home, ".markxus.yml")
+})()
+
+var ConfigPathLocal = (func() string {
 	cwd, err := os.Getwd()
 	if err != nil {
 		panic(err)
 	}
 
-	ConfigPathGlobal = path.Join(home, ".markxus.yml")
-	ConfigPathLocal = path.Join(cwd, ".markxus.yml")
+	return path.Join(cwd, ".markxus.yml")
+})()
 
-	YamlSourceGlobal = NewYamlSource(ConfigPathGlobal)
-	YamlSourceLocal = NewYamlSource(ConfigPathLocal)
+var YamlSourceGlobal, YamlSourceGlobalError = NewYamlSource(ConfigPathGlobal)
+var YamlSourceLocal, YamlSourceLocalError = NewYamlSource(ConfigPathGlobal)
+
+func ResolveFromYaml(configType ConfigType, yamlKey string) string {
+	var kv KV
+	if configType == ConfigTypeGlobal {
+		kv = YamlSourceGlobal
+	} else if configType == ConfigTypeLocal {
+		kv = YamlSourceLocal
+	}
+
+	val, ok := kv[yamlKey].(string)
+	if !ok {
+		return ""
+	}
+
+	return val
 }
 
-func NewYamlSource(path string) KV {
+func NewYamlSource(path string) (KV, error) {
 	kv := KV{}
 	config, err := os.ReadFile(ConfigPathGlobal)
 	if err != nil {
-		return kv
+		return kv, err
 	}
 
-	_ = yaml.Unmarshal(config, &kv)
-	return kv
+	err = yaml.Unmarshal(config, &kv)
+	return kv, err
 }
 
 func ConfigPath(configType ConfigType) string {

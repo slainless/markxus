@@ -14,8 +14,8 @@ func (s *keyringSource) Lookup(key string) (any, bool) {
 		return nil, false
 	}
 
-	value, err := keyring.Get(key, currentUser.Username)
-	if err != nil {
+	value, err := keyring.Get(keyringPath(key), currentUser.Username)
+	if err != nil || value == "" {
 		return nil, false
 	}
 
