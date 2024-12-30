@@ -2,19 +2,21 @@ package init_
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"strings"
 
 	"github.com/charmbracelet/lipgloss"
+	"github.com/slainless/markxus/cli/markxus/command/config/internal"
 	"github.com/slainless/markxus/cli/markxus/config"
 	"github.com/slainless/markxus/cli/markxus/internal/style"
 	"github.com/urfave/cli/v3"
 )
 
 func action(ctx context.Context, c *cli.Command) error {
-	configType := config.Config.Common.ConfigType.Selected()
+	configType := internal.ConfigType()
 
-	err := writeConfig(configType)
+	err := internal.WriteFileWithCheck(configType, internal.CreateDefaultConfig())
 	if err != nil {
 		return err
 	}
@@ -25,18 +27,30 @@ func action(ctx context.Context, c *cli.Command) error {
 	}
 
 	if aiKey != "" && nexusKey != "" {
-		_ = config.SetKeyring(config.YamlKeyGenAiApiKey, aiKey)
-		_ = config.SetKeyring(config.YamlKeyNexusApiKey, nexusKey)
+		err := config.SetKeyring(config.YamlKeyGenAiApiKey, aiKey)
+
+		var sb strings.Builder
+		sb.WriteString("Config initialized, but failed to set keyring:\n")
+		if err != nil {
+			sb.WriteString(err.Error())
+		}
+
+		err = config.SetKeyring(config.YamlKeyNexusApiKey, nexusKey)
+		if err != nil {
+			sb.WriteString(err.Error())
+		}
+
+		return errors.New(sb.String())
 	}
 
 	theme := style.GetTheme()
 	var cardContent strings.Builder
 	fmt.Fprintf(&cardContent,
 		lipgloss.NewStyle().
-			Render("Config type - %s\nPath\n%s\n\nConfiguration has been initiated."),
+			Render("Config type - %s\nPath\n%s\n\nConfiguration has been initialized."),
 		theme.Focused.Description.Render(string(configType)),
 		theme.Focused.Card.Render(
-			theme.Focused.Description.Render(configPath(configType)),
+			theme.Focused.Description.Render(config.ConfigPath(configType)),
 		),
 	)
 

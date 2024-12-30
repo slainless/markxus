@@ -1,4 +1,4 @@
-package init_
+package internal
 
 import (
 	"github.com/slainless/markxus"
@@ -7,7 +7,7 @@ import (
 	"github.com/slainless/markxus/nexus"
 )
 
-func defaultConfig() map[string]any {
+func CreateDefaultConfig() map[string]any {
 	kv := map[string]any{}
 
 	kv[config.YamlKeyGenAiApiKey] = ""

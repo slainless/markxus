@@ -41,3 +41,14 @@ func NewYamlSource(path string) KV {
 	_ = yaml.Unmarshal(config, &kv)
 	return kv
 }
+
+func ConfigPath(configType ConfigType) string {
+	switch configType {
+	case ConfigTypeGlobal:
+		return GlobalConfigPath
+	case ConfigTypeLocal:
+		return LocalConfigPath
+	}
+
+	return ""
+}
