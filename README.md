@@ -36,8 +36,6 @@ go install github.com/slainless/markxus/cli/markxus@latest
 
 ### Configuration
 
-#### Initialization
-
 Most of the functionality of the apps relies on API key of Nexus Mods and Google Generative AI so 
 it is important to set up global configuration (or local configuration) or both vars will need to be supplied to the binary per usage.
 
@@ -73,7 +71,7 @@ Command flags is available to `config init` to alter its behaviour:
 - `--force` or `FORCE_OVERWRITE`: Force overwrite to file if exist
 - `--type` or `CONFIG_TYPE`: Set config type, whether to generate to `global` or `local` (cwd)
 
-#### Changing configuration
+### Changing Configuration
 
 `config edit` can be used to open file editor for the config, using OS preferred text editor:
 
