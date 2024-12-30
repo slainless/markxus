@@ -2,11 +2,12 @@ package main
 
 import (
 	"context"
-	"log"
+	"fmt"
 	"os"
 
 	"github.com/joho/godotenv"
 	"github.com/slainless/markxus/cli/markxus/command"
+	"github.com/slainless/markxus/cli/markxus/internal/style"
 )
 
 func main() {
@@ -17,6 +18,8 @@ func main() {
 		".markxus",
 	)
 	if err := command.Main.Run(context.Background(), os.Args); err != nil {
-		log.Fatal(err)
+		fmt.Println(style.Card().Render(
+			fmt.Sprintf("Error\n%s", style.GetTheme().Focused.ErrorMessage.Render(err.Error())),
+		))
 	}
 }
