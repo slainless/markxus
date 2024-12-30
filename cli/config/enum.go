@@ -18,7 +18,7 @@ func (e *EnumValue[T]) Set(value string) error {
 		}
 	}
 
-	return fmt.Errorf("invalid value received: %s", value)
+	return fmt.Errorf("only accept %s", e.Enum)
 }
 
 func (e *EnumValue[T]) Get() any {
