@@ -85,7 +85,7 @@ func createVarEntry(configType config.ConfigType, yamlKey string, theme *huh.The
 	if value == nil || value == "" {
 		v = theme.Blurred.TextInput.Placeholder.Render("(empty)")
 	} else {
-		v = theme.Focused.Description.Render(fmt.Sprint(v))
+		v = theme.Focused.Description.Render(fmt.Sprint(value))
 	}
 
 	return fmt.Sprintf(
