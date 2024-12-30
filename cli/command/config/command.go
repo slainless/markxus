@@ -2,6 +2,7 @@ package config
 
 import (
 	"github.com/slainless/markxus/cli/markxus/command/config/init_"
+	"github.com/slainless/markxus/cli/markxus/command/config/set"
 	"github.com/urfave/cli/v3"
 )
 
@@ -10,6 +11,7 @@ var Command = &cli.Command{
 	Aliases: []string{"c", "cfg"},
 	Commands: []*cli.Command{
 		init_.Command,
+		set.Command,
 	},
 	Usage: "Manage configuration",
 }
