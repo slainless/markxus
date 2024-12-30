@@ -168,8 +168,8 @@ var (
 		Destination: &Config.Common.Overwrite,
 		Sources: cli.NewValueSourceChain(
 			cli.EnvVar(EnvKeyOverwriteOutput),
-			cli.NewMapValueSource(YamlKeyFallbackGameCode, YamlSourceLocal),
-			cli.NewMapValueSource(YamlKeyFallbackGameCode, YamlSourceGlobal),
+			cli.NewMapValueSource(YamlKeyOverwriteOutput, YamlSourceLocal),
+			cli.NewMapValueSource(YamlKeyOverwriteOutput, YamlSourceGlobal),
 		),
 	}
 
