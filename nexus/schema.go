@@ -12,7 +12,9 @@ type SchemaMod struct {
 	Version     string `json:"version"`
 	CategoryId  int    `json:"category_id"`
 	Status      string `json:"status"`
-	PageUrl     string
+
+	MetadataPageUrl      string
+	MetadataCategoryIcon string
 
 	Author                  string `json:"author"`
 	UploadedBy              string `json:"uploaded_by"`

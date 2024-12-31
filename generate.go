@@ -41,7 +41,7 @@ func (c *Markxus) Generate(
 		}
 	}
 
-	mod.PageUrl = fmt.Sprintf(c.options.UrlModPageFormat, gameCode, modId)
+	mod.MetadataPageUrl = fmt.Sprintf(c.options.UrlModPageFormat, gameCode, modId)
 
 	header, err := processHeader(
 		c.options.MarkdownHeaderTemplate,
