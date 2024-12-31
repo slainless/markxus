@@ -33,7 +33,7 @@ var (
 		Category:    GenAICategory,
 		DefaultText: genai.DefaultModelName,
 		Usage:       "Model name to be used for generative ai requests",
-
+		Value:       genai.DefaultModelName,
 		Sources: cli.NewValueSourceChain(
 			cli.EnvVar(EnvKeyGenAiModelName),
 			cli.NewMapValueSource(YamlKeyGenAiModelName, YamlSourceLocal),
@@ -48,7 +48,7 @@ var (
 		Category:    GenAICategory,
 		DefaultText: "[[DefaultGenAiPromptFormat]]",
 		Usage:       "Prompt format to be used for generative ai requests",
-
+		Value:       markxus.DefaultGenAiPromptFormat,
 		Sources: cli.NewValueSourceChain(
 			cli.EnvVar(EnvKeyMarkxusPromptFormat),
 			cli.NewMapValueSource(YamlKeyMarkxusPromptFormat, YamlSourceLocal),
@@ -83,7 +83,7 @@ var (
 		Category:    "Nexus",
 		DefaultText: nexus.DefaultUrlGetModFormat,
 		Usage:       "URL format to be for mod data API",
-
+		Value:       nexus.DefaultUrlGetModFormat,
 		Sources: cli.NewValueSourceChain(
 			cli.EnvVar(EnvKeyNexusUrlGetModFormat),
 			cli.NewMapValueSource(YamlKeyNexusUrlGetModFormat, YamlSourceLocal),
@@ -98,7 +98,7 @@ var (
 		Category:    "Nexus",
 		DefaultText: markxus.DefaultUrlModPageFormat,
 		Usage:       "URL format to be for mod page",
-
+		Value:       markxus.DefaultUrlModPageFormat,
 		Sources: cli.NewValueSourceChain(
 			cli.EnvVar(EnvKeyMarkxusUrlModPageFormat),
 			cli.NewMapValueSource(YamlKeyMarkxusUrlModPageFormat, YamlSourceLocal),
@@ -117,7 +117,7 @@ var (
 		Category:    GenerationCategory,
 		DefaultText: "[[DefaultMarkdownHeaderFormat]]",
 		Usage:       "Template to be used for markdown header",
-
+		Value:       markxus.DefaultMarkdownHeaderFormat,
 		Sources: cli.NewValueSourceChain(
 			cli.EnvVar(EnvKeyMarkdownHeaderFormat),
 			cli.NewMapValueSource(YamlKeyMarkdownHeaderFormat, YamlSourceLocal),
@@ -132,7 +132,6 @@ var (
 		Category:    GenerationCategory,
 		Usage:       "Output directory for markdown files",
 		Value:       ".",
-
 		Sources: cli.NewValueSourceChain(
 			cli.EnvVar(EnvKeyOutputDir),
 			cli.NewMapValueSource(YamlKeyOutputDir, YamlSourceLocal),
