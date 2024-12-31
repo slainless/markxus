@@ -33,7 +33,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.mod = msg
 		m.status = StatusModDiscovered
 		m.progress = 15
-		cmd := m.bar.SetPercent(m.progress)
+		cmd := m.bar.SetPercent(percent(m.progress))
 		return m, cmd
 
 	case GenerationProgressMsg:
@@ -43,7 +43,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 		m.status = StatusGeneratingMarkdown
 		m.progress = increment(m.progress, 2.5)
-		cmd := m.bar.SetPercent(float64(m.progress))
+		cmd := m.bar.SetPercent(math.Min(99.0, percent(m.progress)))
 		return m, cmd
 
 	case DoneMsg:
@@ -53,7 +53,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 		m.status = StatusDone
 		m.progress = 100
-		cmd := m.bar.SetPercent(100)
+		cmd := m.bar.SetPercent(1.0)
 		return m, cmd
 
 	case ErrorMsg:
@@ -81,4 +81,8 @@ func increment(current float64, decayFactor float64) float64 {
 	}
 
 	return progress
+}
+
+func percent(value float64) float64 {
+	return value / 100
 }
