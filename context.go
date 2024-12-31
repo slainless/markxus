@@ -14,9 +14,16 @@ type GenerationContext struct {
 	OnModFetched         OnModFetchedHook
 	OnHeaderCreated      OnHeaderCreationHook
 	OnLlmStreamConsuming LlmStreamConsumeHook
+	CategoryIconMap      map[int]*CategoryIconMap
 }
 
 type GenerationContextOption func(ctx *GenerationContext)
+
+type CategoryIconMap struct {
+	Id   int    `json:"category_id"`
+	Name string `json:"name"`
+	Icon string `json:"icon"`
+}
 
 func WithOnHeaderCreation(f OnHeaderCreationHook) GenerationContextOption {
 	return func(ctx *GenerationContext) {
@@ -33,5 +40,14 @@ func WithOnModFetched(f OnModFetchedHook) GenerationContextOption {
 func WithOnLlmStreamConsuming(f LlmStreamConsumeHook) GenerationContextOption {
 	return func(ctx *GenerationContext) {
 		ctx.OnLlmStreamConsuming = f
+	}
+}
+
+func WithCategoryIconMap(cm []CategoryIconMap) GenerationContextOption {
+	return func(ctx *GenerationContext) {
+		ctx.CategoryIconMap = map[int]*CategoryIconMap{}
+		for _, icon := range cm {
+			ctx.CategoryIconMap[icon.Id] = &icon
+		}
 	}
 }

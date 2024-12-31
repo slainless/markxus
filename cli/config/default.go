@@ -20,6 +20,9 @@ func CreateDefaultConfig() map[string]any {
 	kv[YamlKeyOutputDir] = FlagOutputDir.Value
 	kv[YamlKeyOverwriteOutput] = FlagOverwriteOutput.Value
 	kv[YamlKeyFallbackGameCode] = ""
+	kv[YamlKeyCategoryIconMap] = map[string][]markxus.CategoryIconMap{
+		"skyrimspecialedition": exampleIconMap(),
+	}
 
 	return kv
 }

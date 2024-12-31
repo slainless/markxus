@@ -53,6 +53,7 @@ var (
 	YamlKeyFallbackGameCode        = "fallback_game_code"
 	YamlKeyOutputDir               = "output_dir"
 	YamlKeyOverwriteOutput         = "overwrite_output"
+	YamlKeyCategoryIconMap         = "category_icon_map"
 )
 
 var (

@@ -43,6 +43,12 @@ func (c *Markxus) Generate(
 
 	mod.MetadataPageUrl = fmt.Sprintf(c.options.UrlModPageFormat, gameCode, modId)
 
+	if generationCtx.CategoryIconMap != nil {
+		if icon := generationCtx.CategoryIconMap[mod.CategoryId]; icon != nil {
+			mod.MetadataCategoryIcon = icon.Icon
+		}
+	}
+
 	header, err := processHeader(
 		c.options.MarkdownHeaderTemplate,
 		mod,
