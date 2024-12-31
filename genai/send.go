@@ -36,6 +36,7 @@ func processResponse(
 	cs *ai.ChatSession,
 	hook markxus.LlmStreamConsumeHook,
 ) error {
+	shouldContinue := false
 	for {
 		response, err := iter.Next()
 		if err == iterator.Done {
@@ -67,14 +68,19 @@ func processResponse(
 			case ai.FinishReasonUnspecified, ai.FinishReasonStop:
 				continue
 			case ai.FinishReasonMaxTokens:
-				iter := cs.SendMessageStream(ctx, ai.Text("Continue"))
-				return processResponse(iter, output, ctx, cs, hook)
+				shouldContinue = true
+				continue
 			case ai.FinishReasonOther, ai.FinishReasonRecitation, ai.FinishReasonSafety:
 				return &AIGenerationError{
 					Reason: candidate.FinishReason,
 				}
 			}
 		}
+	}
+
+	if shouldContinue {
+		iter := cs.SendMessageStream(ctx, ai.Text("Continue where it got cut off (where you left off)"))
+		return processResponse(iter, output, ctx, cs, hook)
 	}
 
 	return nil
