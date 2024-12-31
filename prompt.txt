@@ -1,7 +1,8 @@
 HTML fragment below is from nexusmods.com mod description.
 However, the resulting fragment didn't follow the correct semantic
 of HTML (such as proper heading usage) and instead most of the time 
-mimicking HTML heading, etc. with style or BB forum format instead.
+mimicking HTML heading, etc. with style, BBCode, there are even some
+mod page that uses image as heading instead.
 
 Your task:
 - Convert this fragment to markdown
@@ -10,7 +11,9 @@ Your task:
   For example, YASTM or SOS.
 - In case the reference/mention to other mod is also wrapped with link or has link in adjacent DOM node/text, change it to format:
   `[[{mod_name}]]\({mod_url})`
-- Dont strip image or link
+- Dont strip image or link, instead convert them to their markdown counterpart
+- In case an image is used as heading, create a separate proper heading and keep the image intact
+- Other unhandled BBCode should also be converted to their markdown counterpart
 - Use heading starting from H2
 
 And here is the fragment:
