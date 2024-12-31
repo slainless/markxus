@@ -24,6 +24,19 @@ I planned to support these plugins:
 
 More support to be added later.
 
+## Background
+
+Recently, I tried to seriously rebuild my Skyrim mod list for the latest version. Obsidian is very handy in organizing pile ton of
+mods information, and with its graph view, it helps a lot in quickly finding relevant mods, compatibility with each other, etc.
+However, I dont have that much time to index every mods I use to Obsidian, so here we are.
+
+Now, LLM is needed in this case since I need to annotate all cross-mod references with `[[Obsidian internal linking]]` and LLM is intelligent 
+enough to guess whether some tokens are actually a mention or title of another mod. 
+Nexusmods page conversion to markdown is also not that straightforward since it contains mix of HTML and BB forum tags,
+so relying LLM to intuit the correct tag usage is the best choice here.
+
+For now, this package can only support Google generative AI since that is my only choice at the moment.
+
 ## CLI Usage
 
 ### Installation
@@ -259,3 +272,13 @@ func main() {
 ```
 
 To run example above, you will need nexusmods API key and Google generative AI API key.
+
+## Developer Notes
+
+This is my first time building a CLI using [charmbracelet](https://github.com/charmbracelet)'s [bubbletea](https://github.com/charmbracelet/bubbletea)
+and I admit that the framework is a bit overwhelming for user that didn't come from Elm background, since I'm too used to React's reactive paradigm.
+
+Building the TUI is actually the most time consuming part of this project, largely caused by my own inexperience in handling these libraries.
+I managed to make it work nonetheless 😁. But some parts of the CLI need some refactoring and improvement, specifically at some parts that still use
+pure [huh](https://github.com/charmbracelet/huh) form. Ideally, it should be incorporated into bubbletea modeling framework and make it work seamlessly
+with [urfave/cli](https://github.com/urfave/cli) flow.
