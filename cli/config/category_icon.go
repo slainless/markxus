@@ -13,7 +13,7 @@ func ConfigCategoryIconMap(gameCode string) []markxus.CategoryIconMap {
 		return exampleIconMap()
 	}
 
-	return nil
+	return []markxus.CategoryIconMap{}
 }
 
 func lookup(source KV, gameCode string) []markxus.CategoryIconMap {

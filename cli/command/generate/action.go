@@ -39,6 +39,7 @@ func action(ctx context.Context, c *cli.Command) error {
 		defer program.Send(DoneMsg(0))
 
 		generated, err = app.Generate(ctx, gameCode, modId,
+			markxus.WithCategoryIconMap(config.ConfigCategoryIconMap(gameCode)),
 			markxus.WithOnModFetched(func(ctx context.Context, mod *nexus.SchemaMod) error {
 				if err := checkMarkdown(createOutputPath(mod.Name)); err != nil {
 					return err
