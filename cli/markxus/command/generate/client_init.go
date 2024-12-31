@@ -16,7 +16,9 @@ func createClient(ctx context.Context, c *cli.Command) (*markxus.Markxus, error)
 	var err error
 
 	var headerTemplate *template.Template
-	if config.Config.Generation.HeaderFormat != markxus.DefaultMarkdownHeaderFormat {
+	if config.Config.Generation.HeaderFormat == markxus.DefaultMarkdownHeaderFormat {
+		headerTemplate = markxus.DefaultMarkdownHeaderTemplate
+	} else {
 		headerTemplate, err = template.New("markxus.header").Parse(config.Config.Generation.HeaderFormat)
 		if err != nil {
 			return nil, err
