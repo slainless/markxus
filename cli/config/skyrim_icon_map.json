@@ -8,288 +8,288 @@
       "category_id": 22,
       "name": "Buildings",
       "parent_category": 20,
-      "icon": "School"
+      "icon": "LiSchool"
     },
     {
       "category_id": 24,
       "name": "Gameplay",
       "parent_category": 20,
-      "icon": "DraftingCompass"
+      "icon": "LiDraftingCompass"
     },
     {
       "category_id": 25,
       "name": "Guilds/Factions",
       "parent_category": 20,
-      "icon": "Handshake"
+      "icon": "LiHandshake"
     },
     {
       "category_id": 26,
       "name": "Body, Face, and Hair",
       "parent_category": 20,
-      "icon": "PersonStanding"
+      "icon": "LiPersonStanding"
     },
     {
       "category_id": 27,
       "name": "Items and Objects - Player",
       "parent_category": 20,
-      "icon": "Boxes"
+      "icon": "LiBoxes"
     },
     {
       "category_id": 28,
       "name": "Miscellaneous",
       "parent_category": 20,
-      "icon": "Hexagon"
+      "icon": "LiHexagon"
     },
     {
       "category_id": 29,
       "name": "Models and Textures",
       "parent_category": 20,
-      "icon": "LandPlot"
+      "icon": "LiLandPlot"
     },
     {
       "category_id": 33,
       "name": "NPC",
       "parent_category": 20,
-      "icon": "User"
+      "icon": "LiUser"
     },
     {
       "category_id": 34,
       "name": "Races, Classes, and Birthsigns",
       "parent_category": 20,
-      "icon": "UserSearch"
+      "icon": "LiUserSearch"
     },
     {
       "category_id": 35,
       "name": "Quests and Adventures",
       "parent_category": 20,
-      "icon": "MessageCircleQuestion"
+      "icon": "LiMessageCircleQuestion"
     },
     {
       "category_id": 36,
       "name": "Weapons and Armour",
       "parent_category": 20,
-      "icon": "Sword"
+      "icon": "LiSword"
     },
     {
       "category_id": 39,
       "name": "Utilities",
       "parent_category": 20,
-      "icon": "PocketKnife"
+      "icon": "LiPocketKnife"
     },
     {
       "category_id": 40,
       "name": "Cheats and God items",
       "parent_category": 20,
-      "icon": "TriangleAlert"
+      "icon": "LiTriangleAlert"
     },
     {
       "category_id": 42,
       "name": "User Interface",
       "parent_category": 20,
-      "icon": "PanelsTopLeft"
+      "icon": "LiPanelsTopLeft"
     },
     {
       "category_id": 43,
       "name": "Save Games",
       "parent_category": 20,
-      "icon": "Save"
+      "icon": "LiSave"
     },
     {
       "category_id": 51,
       "name": "Animation",
       "parent_category": 20,
-      "icon": "ArrowLeftRight"
+      "icon": "LiArrowLeftRight"
     },
     {
       "category_id": 53,
       "name": "Cities, Towns, Villages, and Hamlets",
       "parent_category": 20,
-      "icon": "Castle"
+      "icon": "LiCastle"
     },
     {
       "category_id": 54,
       "name": "Armour",
       "parent_category": 20,
-      "icon": "ShieldPlus"
+      "icon": "LiShieldPlus"
     },
     {
       "category_id": 55,
       "name": "Weapons",
       "parent_category": 20,
-      "icon": "Axe"
+      "icon": "LiAxe"
     },
     {
       "category_id": 60,
       "name": "Clothing and Accessories",
       "parent_category": 20,
-      "icon": "Shirt"
+      "icon": "LiShirt"
     },
     {
       "category_id": 62,
       "name": "Visuals and Graphics",
       "parent_category": 20,
-      "icon": "SunMoon"
+      "icon": "LiSunMoon"
     },
     {
       "category_id": 65,
       "name": "Followers & Companions - Creatures",
       "parent_category": 20,
-      "icon": "Dog"
+      "icon": "LiDog"
     },
     {
       "category_id": 67,
       "name": "Player homes",
       "parent_category": 20,
-      "icon": "House"
+      "icon": "LiHouse"
     },
     {
       "category_id": 73,
       "name": "Skills and Leveling",
       "parent_category": 20,
-      "icon": "ChevronsUp"
+      "icon": "LiChevronsUp"
     },
     {
       "category_id": 74,
       "name": "Environmental",
       "parent_category": 20,
-      "icon": "TreePine"
+      "icon": "LiTreePine"
     },
     {
       "category_id": 75,
       "name": "Magic - Spells & Enchantments",
       "parent_category": 20,
-      "icon": "WandSparkles"
+      "icon": "LiWandSparkles"
     },
     {
       "category_id": 76,
       "name": "Stealth",
       "parent_category": 20,
-      "icon": "ScanEye"
+      "icon": "LiScanEye"
     },
     {
       "category_id": 77,
       "name": "Combat",
       "parent_category": 20,
-      "icon": "Swords"
+      "icon": "LiSwords"
     },
     {
       "category_id": 78,
       "name": "Immersion",
       "parent_category": 20,
-      "icon": "Gem"
+      "icon": "LiGem"
     },
     {
       "category_id": 79,
       "name": "Overhauls",
       "parent_category": 20,
-      "icon": "Flame"
+      "icon": "LiFlame"
     },
     {
       "category_id": 82,
       "name": "Modders Resources",
       "parent_category": 20,
-      "icon": "Package"
+      "icon": "LiPackage"
     },
     {
       "category_id": 83,
       "name": "Creatures and Mounts",
       "parent_category": 20,
-      "icon": "PawPrint"
+      "icon": "LiPawPrint"
     },
     {
       "category_id": 84,
       "name": "Patches",
       "parent_category": 20,
-      "icon": "FileDiff"
+      "icon": "LiFileDiff"
     },
     {
       "category_id": 85,
       "name": "Items and Objects - World",
       "parent_category": 20,
-      "icon": "Cuboid"
+      "icon": "LiCuboid"
     },
     {
       "category_id": 88,
       "name": "Dungeons",
       "parent_category": 20,
-      "icon": "Eclipse"
+      "icon": "LiEclipse"
     },
     {
       "category_id": 89,
       "name": "Locations -  New",
       "parent_category": 20,
-      "icon": "MapPinPlus"
+      "icon": "LiMapPinPlus"
     },
     {
       "category_id": 90,
       "name": "Locations - Vanilla",
       "parent_category": 20,
-      "icon": "MapPin"
+      "icon": "LiMapPin"
     },
     {
       "category_id": 92,
       "name": "Collectables, Treasure Hunts, and Puzzles",
       "parent_category": 20,
-      "icon": "Puzzle"
+      "icon": "LiPuzzle"
     },
     {
       "category_id": 93,
       "name": "Magic - Gameplay",
       "parent_category": 20,
-      "icon": "Sparkles"
+      "icon": "LiSparkles"
     },
     {
       "category_id": 94,
       "name": "Alchemy",
       "parent_category": 20,
-      "icon": "TestTubeDiagonal"
+      "icon": "LiTestTubeDiagonal"
     },
     {
       "category_id": 95,
       "name": "Bug Fixes",
       "parent_category": 20,
-      "icon": "BugOff"
+      "icon": "LiBugOff"
     },
     {
       "category_id": 96,
       "name": "Followers & Companions",
       "parent_category": 20,
-      "icon": "Users"
+      "icon": "LiUsers"
     },
     {
       "category_id": 97,
       "name": "Presets - ENB and ReShade",
       "parent_category": 20,
-      "icon": "ImageUp"
+      "icon": "LiImageUp"
     },
     {
       "category_id": 100,
       "name": "Crafting",
       "parent_category": 20,
-      "icon": "Hammer"
+      "icon": "LiHammer"
     },
     {
       "category_id": 103,
       "name": "Armour - Shields",
       "parent_category": 20,
-      "icon": "Shield"
+      "icon": "LiShield"
     },
     {
       "category_id": 104,
       "name": "Shouts",
       "parent_category": 20,
-      "icon": "Radio"
+      "icon": "LiRadio"
     },
     {
       "category_id": 108,
       "name": "VR",
       "parent_category": 20,
-      "icon": "Rotate3d"
+      "icon": "LiRotate3d"
     },
     {
       "category_id": 110,
       "name": "Audio",
       "parent_category": 20,
-      "icon": "Volume2"
+      "icon": "LiVolume2"
     }
   ]
