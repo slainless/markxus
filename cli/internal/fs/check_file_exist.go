@@ -3,12 +3,9 @@ package fs
 import (
 	"errors"
 	"os"
-
-	"github.com/slainless/markxus/cli/markxus/config"
 )
 
-func IsFileExist(configType config.ConfigType) (os.FileInfo, bool, error) {
-	path := config.ConfigPath(configType)
+func IsFileExist(path string) (os.FileInfo, bool, error) {
 	stat, err := os.Stat(path)
 	if os.IsNotExist(err) {
 		return nil, false, nil

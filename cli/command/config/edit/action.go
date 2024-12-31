@@ -18,7 +18,8 @@ func action(ctx context.Context, c *cli.Command) error {
 	configType := internal.ConfigType()
 	configPath := internal.ConfigPath(configType)
 
-	stat, exist, err := fs.IsFileExist(configType)
+	path := config.ConfigPath(configType)
+	stat, exist, err := fs.IsFileExist(path)
 	if err != nil {
 		return err
 	}
