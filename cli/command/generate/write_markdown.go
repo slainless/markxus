@@ -5,9 +5,9 @@ import (
 	"path"
 	"strings"
 
-	"github.com/kennygrant/sanitize"
 	"github.com/slainless/markxus"
 	"github.com/slainless/markxus/cli/markxus/config"
+	"github.com/slainless/markxus/cli/markxus/internal/fs"
 )
 
 func writeMarkdown(generated *markxus.Generated) error {
@@ -20,5 +20,5 @@ func writeMarkdown(generated *markxus.Generated) error {
 }
 
 func createOutputPath(modName string) string {
-	return path.Join(config.Config.Generation.OutputDir, sanitize.Path(modName)+".md")
+	return path.Join(config.Config.Generation.OutputDir, fs.Stripper(modName)+".md")
 }
