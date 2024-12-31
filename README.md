@@ -3,7 +3,7 @@
 <img alt="Custom badge" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fradj307%2Fe9a80731ee236cc67fb00b698e75201e%2Fraw%2F5230074dfb1a60fba917a1232f9382fa5cfec5db%2Fendpoint.json&style=for-the-badge"> ![Google Gemini](https://img.shields.io/badge/google%20gemini-8E75B2?style=for-the-badge&logo=google%20gemini&logoColor=white) ![Markdown](https://img.shields.io/badge/markdown-%23000000.svg?style=for-the-badge&logo=markdown&logoColor=white) ![Obsidian](https://img.shields.io/badge/Obsidian-%23483699.svg?style=for-the-badge&logo=obsidian&logoColor=white)
 
 Markxus is an LLM-powered markdown converter targeted for [Nexus Mods](https://www.nexusmods.com/)'s mod page.
-By default, Markxus is opinionated and it converts nexusmods HTML+BBCode into markdown that is catered for Obsidian markdown format.
+By default, Markxus is opinionated and it converts nexusmods HTML + [BBCode](https://en.wikipedia.org/wiki/BBCode) into markdown that is catered for Obsidian markdown format.
 The `cli` package will use [resty](https://github.com/go-resty/resty) as its HTTP client 
 and [google-generative-ai](https://github.com/google/generative-ai-go) as its LLM client. 
 
@@ -32,8 +32,8 @@ However, I dont have that much time to index every mods I use to Obsidian, so he
 
 Now, LLM is needed in this case since I need to annotate all cross-mod references with `[[Obsidian internal linking]]` and LLM is intelligent 
 enough to guess whether some tokens are actually a mention or title of another mod. 
-Nexusmods page conversion to markdown is also not that straightforward since it contains mix of HTML and BB forum tags,
-so relying LLM to intuit the correct tag usage is the best choice here.
+Nexusmods page conversion to markdown is also not that straightforward since it contains mix of HTML and BBCode,
+so relying on LLM to intuit the correct tag usage is the best choice here.
 
 For now, this package can only support Google generative AI since that is my only choice at the moment.
 
