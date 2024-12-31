@@ -1,10 +1,8 @@
 package generate
 
 import (
-	"fmt"
 	"os"
 	"path"
-	"time"
 
 	"github.com/kennygrant/sanitize"
 	"github.com/slainless/markxus"
@@ -13,8 +11,6 @@ import (
 
 func writeMarkdown(generated *markxus.Generated) error {
 	outputPath := createOutputPath(generated.Mod.Name)
-	fmt.Println(generated.Content)
-	time.Sleep(time.Second * 10)
 	return os.WriteFile(outputPath, []byte(generated.Header+generated.Content), 0666)
 }
 
