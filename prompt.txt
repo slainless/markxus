@@ -11,9 +11,11 @@ Your task:
   For example, YASTM or SOS.
 - In case the reference/mention to other mod is also wrapped with link or has link in adjacent DOM node/text, change it to format:
   `[[{mod_name}]]\({mod_url})`
-- Dont strip image or link, instead convert them to their markdown counterpart
+- Continuing from point before, in case a link is found and it points to github, nexusmods.com, or other mod site, it is most likely a mod so
+  same rule from point before is applied to it
 - In case an image is used as heading, create a separate proper heading and keep the image intact
-- Other unhandled BBCode should also be converted to their markdown counterpart
+- Convert all unhandled BBCode to their markdown counterpart
+- In case a link or image is found inside a div, use HTML tag instead of markdown 
 - Use heading starting from H2
 
 And here is the fragment:
