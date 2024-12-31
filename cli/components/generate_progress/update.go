@@ -1,7 +1,6 @@
 package generate_progress
 
 import (
-	"fmt"
 	"math"
 
 	"github.com/charmbracelet/bubbles/progress"
@@ -35,7 +34,6 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.status = StatusModDiscovered
 		m.progress = 15
 		cmd := m.bar.SetPercent(m.progress)
-		fmt.Println("Mod discovered...", m.progress)
 		return m, cmd
 
 	case GenerationProgressMsg:
@@ -45,7 +43,6 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 		m.status = StatusGeneratingMarkdown
 		m.progress = increment(m.progress, 0.05)
-		fmt.Println("Generating markdown...", m.progress)
 		cmd := m.bar.SetPercent(float64(m.progress))
 		return m, cmd
 
@@ -57,7 +54,6 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.status = StatusDone
 		m.progress = 100
 		cmd := m.bar.SetPercent(100)
-		fmt.Println("Done!", m.progress)
 		return m, cmd
 
 	case ErrorMsg:

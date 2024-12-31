@@ -3,19 +3,11 @@ package generate_progress
 import (
 	"fmt"
 
-	"github.com/charmbracelet/lipgloss"
-	"github.com/slainless/markxus/cli/markxus/colorizer"
+	"github.com/slainless/markxus/cli/markxus/components/mod_name"
 )
 
 func (m Model) View() string {
-	gameBg, gameFg := colorizer.GenerateBackground(m.GameCode)
-	modBg, modFg := colorizer.GenerateBackground(m.ModId)
-
-	titleStyle := lipgloss.NewStyle().Padding(0, 1)
-	title := fmt.Sprint(
-		titleStyle.Foreground(lipgloss.Color(gameFg)).Background(lipgloss.Color(gameBg)).Render(m.GameCode),
-		titleStyle.Foreground(lipgloss.Color(modFg)).Background(lipgloss.Color(modBg)).Render(m.ModId),
-	)
+	title := mod_name.View(m.GameCode, m.ModId)
 
 	var modName string
 	if m.mod == nil {
