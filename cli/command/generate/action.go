@@ -3,16 +3,14 @@ package generate
 import (
 	"context"
 	"fmt"
-	"text/template"
 
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/slainless/markxus"
 	"github.com/slainless/markxus/cli/markxus/components/generate_progress"
+	"github.com/slainless/markxus/cli/markxus/components/mod_name"
 	"github.com/slainless/markxus/cli/markxus/config"
 	"github.com/slainless/markxus/cli/markxus/internal/style"
-	"github.com/slainless/markxus/genai"
 	"github.com/slainless/markxus/nexus"
-	"github.com/slainless/markxus/resty"
 	"github.com/urfave/cli/v3"
 )
 
@@ -22,79 +20,78 @@ func action(ctx context.Context, c *cli.Command) error {
 		return err
 	}
 
-	var headerTemplate *template.Template
-	if config.Config.Generation.HeaderFormat != markxus.DefaultMarkdownHeaderFormat {
-		headerTemplate, err = template.New("markxus.header").Parse(config.Config.Generation.HeaderFormat)
-		if err != nil {
-			return err
-		}
-	}
-
-	resty := resty.NewRestyClient()
-	nexusClient, err := nexus.NewClient(
-		nexus.WithApiKey(config.Config.Nexus.ApiKey),
-		nexus.WithHTTPDriver(resty),
-		nexus.WithUrlGetModFormat(config.Config.Nexus.Url.GetModFormat),
-	)
+	app, err := createClient(ctx, c)
 	if err != nil {
 		return err
 	}
 
-	genaiClient, err := genai.NewGenAiClient(ctx,
-		genai.WithApiKey(config.Config.GenAi.ApiKey),
-		genai.WithModelName(config.Config.GenAi.ModelName),
-	)
-	if err != nil {
-		return err
-	}
-
-	app := markxus.NewMarkxus(nexusClient, genaiClient,
-		markxus.WithPromptFormat(config.Config.GenAi.Prompt),
-		markxus.WithUrlModPageFormat(config.Config.Nexus.Url.ModPageFormat),
-		markxus.WithMarkdownHeaderTemplate(headerTemplate),
-	)
-
-	theme := style.GetTheme()
 	progress := generate_progress.New(gameCode, modId).SetStatus(generate_progress.StatusStarted)
 	progress.Update(generate_progress.StartMsg(0))
 
-	program := tea.NewProgram(progress)
+	program := tea.NewProgram(view{
+		progress: progress,
+	})
 
-	derivedCtx, cancel := context.WithCancel(ctx)
-	var teaError error
+	var generated *markxus.Generated
+	var generateError error
 	go func() {
-		if _, err := program.Run(); err != nil {
-			fmt.Println(
-				style.Card().Render(
-					theme.Focused.ErrorMessage.Render(err.Error()),
-				),
-			)
-			teaError = err
-			cancel()
+		defer program.Quit()
+		defer program.Send(DoneMsg(0))
+
+		generated, err = app.Generate(ctx, gameCode, modId,
+			markxus.WithOnModFetched(func(ctx context.Context, mod *nexus.SchemaMod) error {
+				if err := checkMarkdown(createOutputPath(mod.Name)); err != nil {
+					return err
+				}
+
+				program.Send(generate_progress.ModDiscoveredMsg(mod))
+				return nil
+			}),
+			markxus.WithOnLlmStreamConsuming(func(ctx context.Context, streamData any, currentOutput *string) error {
+				program.Send(generate_progress.GenerationProgressMsg(0))
+				return nil
+			}),
+		)
+		if err != nil {
+			generateError = err
+			return
+		}
+
+		program.Send(generate_progress.DoneMsg(0))
+
+		err = checkMarkdown(createOutputPath(generated.Mod.Name))
+		if err != nil {
+			generateError = err
+			return
+		}
+
+		err = writeMarkdown(generated)
+		if err != nil {
+			generateError = err
+			return
 		}
 	}()
 
-	generated, err := app.Generate(derivedCtx, gameCode, modId,
-		markxus.WithOnModFetched(func(ctx context.Context, mod *nexus.SchemaMod) error {
-			program.Send(generate_progress.ModDiscoveredMsg(mod))
-			return nil
-		}),
-		markxus.WithOnLlmStreamConsuming(func(ctx context.Context, streamData any, currentOutput *string) error {
-			program.Send(generate_progress.GenerationProgressMsg(0))
-			return nil
-		}),
-	)
-
-	if err == derivedCtx.Err() {
-		return teaError
-	} else if err != nil {
+	if _, err := program.Run(); err != nil {
 		return err
 	}
 
-	program.ReleaseTerminal()
-	program.Quit()
-	return nil
-	fmt.Println(generated)
+	if generateError != nil {
+		return err
+	}
+
+	theme := style.GetTheme()
+	fmt.Println(
+		style.Card().Render(
+			fmt.Sprintf("%s\n%s\n\n%s\n%s",
+				mod_name.View(fmt.Sprint(gameCode), fmt.Sprint(generated.Mod.ModId)),
+				generated.Mod.Name,
+				"Saved to:",
+				theme.Focused.Description.Render(createOutputPath(generated.Mod.Name)),
+			),
+		),
+	)
+
 	return nil
 }
 
