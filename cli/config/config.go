@@ -1,5 +1,7 @@
 package config
 
+const Version = "v0.1.0"
+
 type MarkxusConfig struct {
 	GenAi struct {
 		ApiKey    string
