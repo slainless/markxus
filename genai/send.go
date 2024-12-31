@@ -65,7 +65,7 @@ func processResponse(
 
 			switch candidate.FinishReason {
 			case ai.FinishReasonUnspecified, ai.FinishReasonStop:
-				return nil
+				continue
 			case ai.FinishReasonMaxTokens:
 				iter := cs.SendMessageStream(ctx, ai.Text("Continue"))
 				return processResponse(iter, output, ctx, cs, hook)
