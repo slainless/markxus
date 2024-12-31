@@ -1,6 +1,16 @@
 ---
 url: {{.MetadataPageUrl}}
 icon: {{.MetadataCategoryIcon}}
+banner: {{.PictureUrl}}
+version: {{.Version}}
+category_id: {{.CategoryId}}
+author: {{.Author}}
+uploaded_by: {{.UploadedBy}}
+created_at: {{.CreatedTimestamp}}
+updated_at: {{.UpdatedTimestamp}}
+endorsement: {{.EndorsementCount}}
+downloads: {{.ModDownloads}}
+unique_downloads: {{.ModUniqueDownloads}}
 ---
 
 # {{.Name}}
