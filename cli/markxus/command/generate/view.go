@@ -1,10 +1,14 @@
 package generate
 
 import (
+	"errors"
+
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/slainless/markxus/cli/markxus/components/generate_progress"
 	"github.com/slainless/markxus/cli/markxus/internal/style"
 )
+
+var quitErr error
 
 type view struct {
 	done     bool
@@ -16,10 +20,17 @@ func (v view) Init() tea.Cmd {
 }
 
 func (v view) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-	switch msg.(type) {
+	switch msg := msg.(type) {
 	case DoneMsg:
 		v.done = true
-		return v, nil
+		return v, tea.Quit
+
+	case tea.KeyMsg:
+		switch msg.String() {
+		case "ctrl+c":
+			quitErr = errors.New("Cancelled by CTRL+C")
+			return v.Update(DoneMsg(0))
+		}
 	}
 
 	progress, cmd := v.progress.Update(msg)

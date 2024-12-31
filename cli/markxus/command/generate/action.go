@@ -25,19 +25,17 @@ func action(ctx context.Context, c *cli.Command) error {
 		return err
 	}
 
-	progress := generate_progress.New(gameCode, modId).SetStatus(generate_progress.StatusStarted)
-	progress.Update(generate_progress.StartMsg(0))
+	progress, _ := generate_progress.New(gameCode, modId).
+		SetStatus(generate_progress.StatusStarted).
+		Update(generate_progress.StartMsg(0))
 
 	program := tea.NewProgram(view{
-		progress: progress,
+		progress: progress.(generate_progress.Model),
 	})
 
 	var generated *markxus.Generated
 	var generateError error
 	go func() {
-		defer program.Quit()
-		defer program.Send(DoneMsg(0))
-
 		generated, err = app.Generate(ctx, gameCode, modId,
 			markxus.WithCategoryIconMap(config.ConfigCategoryIconMap(gameCode)),
 			markxus.WithOnModFetched(func(ctx context.Context, mod *nexus.SchemaMod) error {
@@ -78,7 +76,11 @@ func action(ctx context.Context, c *cli.Command) error {
 	}
 
 	if generateError != nil {
-		return err
+		return generateError
+	}
+
+	if quitErr != nil {
+		return quitErr
 	}
 
 	theme := style.GetTheme()
