@@ -42,7 +42,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		}
 
 		m.status = StatusGeneratingMarkdown
-		m.progress = increment(m.progress, 0.05)
+		m.progress = increment(m.progress, 2.5)
 		cmd := m.bar.SetPercent(float64(m.progress))
 		return m, cmd
 
