@@ -3,6 +3,7 @@ package generate
 import (
 	"os"
 	"path"
+	"strings"
 
 	"github.com/kennygrant/sanitize"
 	"github.com/slainless/markxus"
@@ -11,7 +12,11 @@ import (
 
 func writeMarkdown(generated *markxus.Generated) error {
 	outputPath := createOutputPath(generated.Mod.Name)
-	return os.WriteFile(outputPath, []byte(generated.Header+generated.Content), 0666)
+	return os.WriteFile(
+		outputPath,
+		[]byte(strings.Trim(generated.Header+generated.Content, "\n ")),
+		0666,
+	)
 }
 
 func createOutputPath(modName string) string {
