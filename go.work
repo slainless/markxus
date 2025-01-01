@@ -5,4 +5,5 @@ use (
 	./cli/markxus
   ./resty
   ./genai
+  ./openai
 )
