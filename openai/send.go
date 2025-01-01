@@ -48,6 +48,8 @@ func processResponse(
 	output *string,
 	hook markxus.LlmStreamConsumeHook,
 ) error {
+	delta := ""
+	shouldContinue := false
 	for {
 		response, err := stream.Recv()
 		if errors.Is(err, io.EOF) {
@@ -66,32 +68,40 @@ func processResponse(
 		}
 
 		for _, choice := range response.Choices {
-			*output += choice.Delta.Content
+			delta += choice.Delta.Content
 
 			switch choice.FinishReason {
 			case openai.FinishReasonStop, openai.FinishReasonNull:
 				continue
 			case openai.FinishReasonLength:
-				stream.Close()
-				req.Messages = append(req.Messages, openai.ChatCompletionMessage{
-					Role:    openai.ChatMessageRoleAssistant,
-					Content: *output,
-				}, openai.ChatCompletionMessage{
-					Role:    openai.ChatMessageRoleUser,
-					Content: "Continue where you left off and remember your previous task.",
-				})
-				stream, err := client.CreateChatCompletionStream(ctx, req)
-				if err != nil {
-					return err
-				}
-
-				return processResponse(ctx, client, stream, req, output, hook)
+				shouldContinue = true
+				continue
 			case openai.FinishReasonContentFilter, openai.FinishReasonFunctionCall, openai.FinishReasonToolCalls:
+				*output += delta
 				return &AIGenerationError{
 					Reason: choice.FinishReason,
 				}
 			}
 		}
+	}
+
+	*output += delta
+
+	if shouldContinue {
+		stream.Close()
+		req.Messages = append(req.Messages, openai.ChatCompletionMessage{
+			Role:    openai.ChatMessageRoleAssistant,
+			Content: delta,
+		}, openai.ChatCompletionMessage{
+			Role:    openai.ChatMessageRoleUser,
+			Content: "Continue where you left off and remember your previous task.",
+		})
+		stream, err := client.CreateChatCompletionStream(ctx, req)
+		if err != nil {
+			return err
+		}
+
+		return processResponse(ctx, client, stream, req, output, hook)
 	}
 
 	return nil
