@@ -1,9 +1,11 @@
 package internal
 
-import cfg "github.com/slainless/markxus/cli/markxus/config"
+import (
+	cfg "github.com/slainless/markxus/cli/markxus/config"
+)
 
 func ConfigType() cfg.ConfigType {
-	return cfg.Config.Common.ConfigType.Selected()
+	return cfg.Config.Common.ConfigType.Value()
 }
 
 func ConfigPath(t cfg.ConfigType) string {

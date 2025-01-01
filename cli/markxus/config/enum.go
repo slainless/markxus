@@ -32,3 +32,11 @@ func (e *EnumValue[T]) String() string {
 func (e *EnumValue[T]) Selected() T {
 	return e.selected
 }
+
+func (e *EnumValue[T]) Value() T {
+	if e.selected == "" {
+		return e.Default
+	}
+
+	return e.selected
+}
