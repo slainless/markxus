@@ -31,7 +31,7 @@ The main package by design is client-agnostic so extending support to other comb
 is pretty simple.
 
 > [!NOTE]
-> Switch to Open AI if `FinishReasonCitation` occurs when using generative AI model.
+> Switch to Open AI if `FinishReasonRecitation` occurs when using generative AI model.
 > This is a known issue, thanks to Google's usual antic:
 > 
 > https://github.com/google/generative-ai-docs/issues/257
