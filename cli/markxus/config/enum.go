@@ -22,16 +22,13 @@ func (e *EnumValue[T]) Set(value string) error {
 }
 
 func (e *EnumValue[T]) Get() any {
-	if e.selected == "" {
-		return e.Default
-	}
-	return e.selected
+	return e
 }
 
 func (e *EnumValue[T]) String() string {
-	return string(e.Get().(T))
+	return string(e.Selected())
 }
 
 func (e *EnumValue[T]) Selected() T {
-	return e.Get().(T)
+	return e.selected
 }

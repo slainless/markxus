@@ -6,7 +6,7 @@ type KV map[string]any
 
 func (s KV) Lookup(key string) (any, bool) {
 	val, ok := s[key]
-	if val == nil || val == "" {
+	if val == nil || val == "" || !ok {
 		return nil, false
 	}
 
