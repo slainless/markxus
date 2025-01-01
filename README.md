@@ -65,7 +65,7 @@ enough to guess whether some tokens are actually a mention or title of another m
 Nexusmods page conversion to markdown is also not that straightforward since it contains mix of HTML and BBCode,
 so relying on LLM to intuit the correct tag usage is the best choice here.
 
-For now, this package can only support Google generative AI since that is my only choice at the moment.
+For now, this package can only support Google generative AI and Open AI since that is my only choice at the moment.
 
 ## CLI Usage
 
