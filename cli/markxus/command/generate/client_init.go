@@ -8,6 +8,7 @@ import (
 	"github.com/slainless/markxus/cli/markxus/config"
 	"github.com/slainless/markxus/genai"
 	"github.com/slainless/markxus/nexus"
+	"github.com/slainless/markxus/openai"
 	"github.com/slainless/markxus/resty"
 	"github.com/urfave/cli/v3"
 )
@@ -35,15 +36,24 @@ func createClient(ctx context.Context, c *cli.Command) (*markxus.Markxus, error)
 		return nil, err
 	}
 
-	genaiClient, err := genai.NewGenAiClient(ctx,
-		genai.WithApiKey(config.Config.GenAi.ApiKey),
-		genai.WithModelName(config.Config.GenAi.ModelName),
-	)
+	var llmClient markxus.LlmClient
+	switch config.Config.GenAi.Provider.Selected() {
+	case config.ProviderGenAi:
+		llmClient, err = genai.NewGenAiClient(ctx,
+			genai.WithApiKey(config.Config.GenAi.ApiKey),
+			genai.WithModelName(config.Config.GenAi.ModelName),
+		)
+	case config.ProviderOpenAi:
+		llmClient, err = openai.NewOpenAiClient(
+			openai.WithApiKey(config.Config.GenAi.ApiKey),
+			openai.WithModelName(config.Config.GenAi.ModelName),
+		)
+	}
 	if err != nil {
 		return nil, err
 	}
 
-	return markxus.NewMarkxus(nexusClient, genaiClient,
+	return markxus.NewMarkxus(nexusClient, llmClient,
 		markxus.WithPromptFormat(config.Config.GenAi.Prompt),
 		markxus.WithUrlModPageFormat(config.Config.Nexus.Url.ModPageFormat),
 		markxus.WithMarkdownHeaderTemplate(headerTemplate),

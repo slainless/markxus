@@ -10,6 +10,19 @@ import (
 var (
 	GenAICategory = "GenAI"
 
+	FlagGenAiProvider = &cli.GenericFlag{
+		Name:        "genai-provider",
+		Aliases:     []string{"gp"},
+		Usage:       "Provider to be used, either from OpenAI (open_ai) or Google Generative AI (gen_ai)",
+		DefaultText: "global",
+		Value:       &Config.GenAi.Provider,
+		Sources: cli.NewValueSourceChain(
+			cli.EnvVar(EnvKeyGenAiProvider),
+			cli.NewMapValueSource(YamlKeyGenAiProvider, YamlSourceLocal),
+			cli.NewMapValueSource(YamlKeyGenAiProvider, YamlSourceGlobal),
+		),
+	}
+
 	FlagGenAiApiKey = &cli.StringFlag{
 		Name:        "genai-key",
 		Aliases:     []string{"gk"},

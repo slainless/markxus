@@ -1,9 +1,10 @@
 package config
 
-const Version = "v0.1.8"
+const Version = "v0.1.9"
 
 type MarkxusConfig struct {
 	GenAi struct {
+		Provider  EnumValue[Provider]
 		ApiKey    string
 		ModelName string
 
@@ -38,6 +39,10 @@ type MarkxusConfig struct {
 var Config MarkxusConfig
 
 func init() {
+	Config.GenAi.Provider = EnumValue[Provider]{
+		Enum:    []Provider{ProviderOpenAi, ProviderGenAi},
+		Default: ProviderGenAi,
+	}
 	Config.Common.ConfigType = EnumValue[ConfigType]{
 		Enum:    []ConfigType{ConfigTypeGlobal, ConfigTypeLocal},
 		Default: ConfigTypeGlobal,
@@ -45,6 +50,7 @@ func init() {
 }
 
 var (
+	YamlKeyGenAiProvider           = "genai_provider"
 	YamlKeyGenAiApiKey             = "genai_api_key"
 	YamlKeyGenAiModelName          = "genai_model_name"
 	YamlKeyMarkxusPromptFormat     = "genai_prompt_format"
@@ -59,6 +65,7 @@ var (
 )
 
 var (
+	EnvKeyGenAiProvider           = "GEN_AI_PROVIDER"
 	EnvKeyGenAiApiKey             = "GEN_AI_API_KEY"
 	EnvKeyGenAiModelName          = "GEN_AI_MODEL_NAME"
 	EnvKeyMarkxusPromptFormat     = "GEN_AI_PROMPT_FORMAT"
@@ -72,6 +79,7 @@ var (
 )
 
 var yamlToEnv = map[string]string{
+	YamlKeyGenAiProvider:           EnvKeyGenAiProvider,
 	YamlKeyGenAiApiKey:             EnvKeyGenAiApiKey,
 	YamlKeyGenAiModelName:          EnvKeyGenAiModelName,
 	YamlKeyMarkxusPromptFormat:     EnvKeyMarkxusPromptFormat,
@@ -85,6 +93,7 @@ var yamlToEnv = map[string]string{
 }
 
 var envToYaml = map[string]string{
+	EnvKeyGenAiProvider:           YamlKeyGenAiProvider,
 	EnvKeyGenAiApiKey:             YamlKeyGenAiApiKey,
 	EnvKeyGenAiModelName:          YamlKeyGenAiModelName,
 	EnvKeyMarkxusPromptFormat:     YamlKeyMarkxusPromptFormat,
@@ -107,6 +116,8 @@ func YamlToEnv(key string) string {
 
 func Resolve(envKey string) any {
 	switch envKey {
+	case EnvKeyGenAiProvider:
+		return Config.GenAi.Provider.Selected()
 	case EnvKeyGenAiApiKey:
 		return Config.GenAi.ApiKey
 	case EnvKeyGenAiModelName:
@@ -137,4 +148,11 @@ type ConfigType string
 var (
 	ConfigTypeGlobal ConfigType = "global"
 	ConfigTypeLocal  ConfigType = "local"
+)
+
+type Provider string
+
+var (
+	ProviderOpenAi Provider = "open_ai"
+	ProviderGenAi  Provider = "gen_ai"
 )
