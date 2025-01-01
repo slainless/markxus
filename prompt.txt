@@ -12,6 +12,8 @@ Your task:
     many mods will be mentioned here. 
   - In case the reference/mention to other mod is also wrapped with link or has link in adjacent DOM node/text, change it to format:
     `[[{mod_name}]]\({mod_url})`.
+  - In case the mod name is already wrapped with BBCode (usually with [color]mod_name[/color]), simply convert it to
+    `[[{mod_name}]]`. But dont forget the url
   - Any wrapped mod name MUST NOT be be wrapped with HTML tag since it will break markdown parsing
   - In case a link is found and it points to github, nexusmods.com, or other mod site, it is most likely a mod so also wrap it.
 - In case an image is used as heading, create a separate proper heading and keep the image intact

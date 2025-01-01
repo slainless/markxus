@@ -1,6 +1,6 @@
 package config
 
-const Version = "v0.1.7"
+const Version = "v0.1.8"
 
 type MarkxusConfig struct {
 	GenAi struct {
