@@ -10,20 +10,31 @@
 </p>
 
 > [!TIP]
-> Use `gemini-1.5-pro` model to generate more accurate result as shown in the GIF above!
+> Use a suitable model to generate more accurate result. Example GIF above used `gemini-1.5-pro`.
 >
 > Using flash model (default option) will result in inaccurate mod referencing result but generate faster. Instead, pro model
-> generate a very accurate result with tradeoff being slower generation.
+> generate a very accurate result with tradeoff being slower generation. OpenAI's GPT-4o-mini is also pretty capable with
+> task while generating much faster than Google's gemini-1.5-pro.
 
 Markxus is an LLM-powered markdown converter targeted for [Nexus Mods](https://www.nexusmods.com/)'s mod page.
-By default, Markxus is opinionated and it converts nexusmods HTML + [BBCode](https://en.wikipedia.org/wiki/BBCode) into markdown that is catered for Obsidian markdown format.
+By default, Markxus is opinionated and it converts nexusmods HTML + [BBCode](https://en.wikipedia.org/wiki/BBCode) 
+into markdown that is catered for Obsidian markdown format.
 The `cli` package will use [resty](https://github.com/go-resty/resty) as its HTTP client 
-and [google-generative-ai](https://github.com/google/generative-ai-go) as its LLM client.
+and [google-generative-ai](https://github.com/google/generative-ai-go) as its LLM client by default.
 
-This package provides built-in supports for both [Resty (./resty)](./resty) and [Google Generative AI (./genai)](./genai/).
+This package provides support for: 
+- [Resty](./resty) as Nexusmods HTTP client
+- [Google Generative AI](./genai/) as default LLM provider
+- [OpenAI GPT](./openai/) as alternative LLM provider
 
-However, the main package by design is client-agnostic and any combination of HTTP and LLM client can be used, but
-a dedicated `cli` package must be created instead to make use of these interfaces.
+The main package by design is client-agnostic so extending support to other combination of HTTP and LLM client
+is pretty simple.
+
+> [!NOTE]
+> Switch to Open AI if `FinishReasonCitation` occurs when using generative AI model.
+> This is a known issue, thanks to Google's usual antic:
+> 
+> https://github.com/google/generative-ai-docs/issues/257
 
 ## Obsidian markdown
 
@@ -94,7 +105,7 @@ markxus config set NEXUS_API_KEY <new_key>
 or
 
 ```sh
-markxus config set GEN_AI_API_KEY <new_key>
+markxus config set LLM_API_KEY <new_key>
 ```
 
 Command flags is available to `config init` to alter its behaviour:
@@ -119,7 +130,7 @@ Individual config key can also be set using:
 markxus config set <yaml_or_env_key> <value>
 ```
 
-Must be noted, however, that `NEXUS_API_KEY` and `GEN_AI_API_KEY` cannot be set to config via this command
+Must be noted, however, that `NEXUS_API_KEY` and `LLM_API_KEY` cannot be set to config via this command
 and must be edited manually. Setting either field will configure OS credential storage instead of config 
 (and obviously, `--type` will be ignored when setting either fields). 
 
@@ -131,14 +142,24 @@ Command flags is available to `config set` to alter its behaviour:
 
 All these options can also be set from env vars or CLI flag.
 
-##### Google Generative AI
+##### LLM
+
+- **Provider**
+
+	```yaml
+	Flag: --llm-provider, --gp
+	Env: LLM_PROVIDER
+	YAML: llm_provider
+	```
+
+	LLM provider to be used, either `open_ai` or `gen_ai`. Defaults to `gen_ai`.
 
 - **API key** 
 
 	```yaml
-	Flag: --genai-key, --gk
-	Env: GEN_AI_API_KEY
-	YAML: genai_api_key
+	Flag: --llm-key, --gk
+	Env: LLM_API_KEY
+	YAML: llm_key
 	```
 
 	Self-explanatory. **Required**.
@@ -147,8 +168,8 @@ All these options can also be set from env vars or CLI flag.
 
 	```yaml
 	Flag: --model, --m
-	Env: GEN_AI_API_KEY
-	YAML: genai_api_key
+	Env: LLM_API_KEY
+	YAML: llm_key
 	```
 
 	LLM model used for conversion. Defaults to `gemini-1.5-flash`.
@@ -157,8 +178,8 @@ All these options can also be set from env vars or CLI flag.
 
 	```yaml
 	Flag: --prompt, --p
-	Env: GEN_AI_PROMPT_FORMAT
-	YAML: genai_prompt_format
+	Env: LLM_PROMPT_FORMAT
+	YAML: llm_prompt_format
 	```
 
 	Prompt format used to query the LLM. Defaults to [prompt.txt](./prompt.txt).
