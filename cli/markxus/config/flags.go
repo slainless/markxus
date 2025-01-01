@@ -15,6 +15,7 @@ var (
 		Aliases:     []string{"gp"},
 		Usage:       "LLM provider to be used, either from OpenAI (open_ai) or Google Generative AI (gen_ai)",
 		DefaultText: "global",
+		Category:    LLMCategory,
 		Value:       &Config.Llm.Provider,
 		Sources: cli.NewValueSourceChain(
 			cli.EnvVar(EnvKeyLlmProvider),
