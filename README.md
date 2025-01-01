@@ -17,6 +17,8 @@
 > Using flash model (default option) will result in inaccurate mod referencing result but generate faster. Instead, pro model
 > generate a very accurate result with tradeoff being slower generation. OpenAI's GPT-4o-mini is also pretty capable
 > with this particular task while generating much faster than Google's gemini-1.5-pro.
+>
+> Recommended: Use `gemini-1.5-pro` or `gpt-4o-mini` (but `gpt-4o` is highly recommended)
 
 Markxus is an LLM-powered markdown converter targeted for [Nexus Mods](https://www.nexusmods.com/)'s mod page.
 By default, Markxus is opinionated and it converts nexusmods HTML + [BBCode](https://en.wikipedia.org/wiki/BBCode) 
