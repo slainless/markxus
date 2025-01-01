@@ -19,8 +19,8 @@ Obsidian is prominently known its for features and its rich community support. O
 Obsidian community also has many plugins that can handle these data.
 
 I planned to support these plugins:
-  - [Banners](https://github.com/noatpad/obsidian-banners)
-  - [Iconize](https://github.com/FlorianWoelki/obsidian-iconize)
+  - [🚩 Pixel Banner for Obsidian](https://github.com/jparkerweb/pixel-banner)
+  - [Obsidian Iconize](https://github.com/FlorianWoelki/obsidian-iconize)
 
 More support to be added later.
 
