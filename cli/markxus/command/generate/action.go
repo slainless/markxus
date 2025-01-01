@@ -36,6 +36,8 @@ func action(ctx context.Context, c *cli.Command) error {
 	var generated *markxus.Generated
 	var generateError error
 	go func() {
+		defer program.Send(DoneMsg(0))
+
 		generated, err = app.Generate(ctx, gameCode, modId,
 			markxus.WithCategoryIconMap(config.ConfigCategoryIconMap(gameCode)),
 			markxus.WithOnModFetched(func(ctx context.Context, mod *nexus.SchemaMod) error {
