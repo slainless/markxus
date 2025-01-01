@@ -79,7 +79,7 @@ func processResponse(
 	}
 
 	if shouldContinue {
-		iter := cs.SendMessageStream(ctx, ai.Text("Continue where it got cut off (where you left off)"))
+		iter := cs.SendMessageStream(ctx, ai.Text("Continue where you left off and remember your previous task."))
 		return processResponse(iter, output, ctx, cs, hook)
 	}
 

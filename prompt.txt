@@ -6,13 +6,14 @@ mod page that uses image as heading instead.
 
 Your task:
 - Convert this fragment to markdown
-- Wrap all references/mention to other mod with format `[[{mod_name}]]`
-- To be noted that mention/reference to other mod name can be in form of abbreviation of said mod.
-  For example, YASTM or SOS.
-- In case the reference/mention to other mod is also wrapped with link or has link in adjacent DOM node/text, change it to format:
-  `[[{mod_name}]]\({mod_url})`
-- Continuing from point before, in case a link is found and it points to github, nexusmods.com, or other mod site, it is most likely a mod so
-  same rule from point before is applied to it
+- You MUST wrap all references/mention to other mod with format `[[{mod_name}]]`, whether or not it has backlink url or not.
+  - Mention/reference to other mod name may also be in form of abbreviation of said mod. If in doubt, just wrap it.
+  - Look out for Compatibility, Incompatibility, or Requirement section in the mod page since it will be highly likely that
+    many mods will be mentioned here. 
+  - In case the reference/mention to other mod is also wrapped with link or has link in adjacent DOM node/text, change it to format:
+    `[[{mod_name}]]\({mod_url})`.
+  - Any wrapped mod name MUST NOT be be wrapped with HTML tag since it will break markdown parsing
+  - In case a link is found and it points to github, nexusmods.com, or other mod site, it is most likely a mod so also wrap it.
 - In case an image is used as heading, create a separate proper heading and keep the image intact
 - Convert all unhandled BBCode to their markdown counterpart
 - In case a link or image is found inside a div, use HTML tag instead of markdown 
