@@ -6,13 +6,13 @@ import (
 )
 
 type MarkxusOptions struct {
-	GenAiPromptFormat      string
+	LlmPromptFormat        string
 	UrlModPageFormat       string
 	MarkdownHeaderTemplate *template.Template
 }
 
 //go:embed prompt.txt
-var DefaultGenAiPromptFormat string
+var DefaultLlmPromptFormat string
 
 //go:embed header.txt
 var DefaultMarkdownHeaderFormat string
@@ -27,7 +27,7 @@ func init() {
 	DefaultMarkdownHeaderTemplate = template
 }
 
-const DefaultGenAiModelName = "gemini-1.5-flash"
+const DefaultLlmModelName = "gemini-1.5-flash"
 const DefaultUrlModPageFormat = "https://nexusmods.com/%v/mods/%v"
 
 type MarkxusOption func(*MarkxusOptions)
@@ -37,10 +37,10 @@ type MarkxusOption func(*MarkxusOptions)
 //
 //   - Mod description
 //
-// Defaults to [[DefaultGenAiPromptFormat]]
+// Defaults to [[DefaultLlmPromptFormat]]
 func WithPromptFormat(prompt string) MarkxusOption {
 	return func(mo *MarkxusOptions) {
-		mo.GenAiPromptFormat = prompt
+		mo.LlmPromptFormat = prompt
 	}
 }
 

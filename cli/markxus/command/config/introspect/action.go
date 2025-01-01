@@ -56,9 +56,9 @@ func action(ctx context.Context, c *cli.Command) error {
 		vars.WriteString(theme.Focused.Description.Render("Resolved from all sources") + "\n\n")
 	}
 
-	vars.WriteString(createVarEntry(configType, config.YamlKeyGenAiProvider, theme) + "\n\n")
-	vars.WriteString(createVarEntry(configType, config.YamlKeyGenAiApiKey, theme) + "\n\n")
-	vars.WriteString(createVarEntry(configType, config.YamlKeyGenAiModelName, theme) + "\n\n")
+	vars.WriteString(createVarEntry(configType, config.YamlKeyLlmProvider, theme) + "\n\n")
+	vars.WriteString(createVarEntry(configType, config.YamlKeyLlmApiKey, theme) + "\n\n")
+	vars.WriteString(createVarEntry(configType, config.YamlKeyLlmModelName, theme) + "\n\n")
 	vars.WriteString(createVarEntry(configType, config.YamlKeyMarkxusPromptFormat, theme) + "\n\n")
 	vars.WriteString(createVarEntry(configType, config.YamlKeyNexusApiKey, theme) + "\n\n")
 	vars.WriteString(createVarEntry(configType, config.YamlKeyNexusUrlGetModFormat, theme) + "\n\n")

@@ -9,10 +9,10 @@ import (
 func CreateDefaultConfig() map[string]any {
 	kv := map[string]any{}
 
-	kv[YamlKeyGenAiProvider] = Config.GenAi.Provider.Default
-	kv[YamlKeyGenAiApiKey] = ""
-	kv[YamlKeyGenAiModelName] = genai.DefaultModelName
-	kv[YamlKeyMarkxusPromptFormat] = markxus.DefaultGenAiPromptFormat
+	kv[YamlKeyLlmProvider] = Config.Llm.Provider.Default
+	kv[YamlKeyLlmApiKey] = ""
+	kv[YamlKeyLlmModelName] = genai.DefaultModelName
+	kv[YamlKeyMarkxusPromptFormat] = markxus.DefaultLlmPromptFormat
 
 	kv[YamlKeyNexusApiKey] = ""
 	kv[YamlKeyNexusUrlGetModFormat] = nexus.DefaultUrlGetModFormat

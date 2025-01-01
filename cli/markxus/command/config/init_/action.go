@@ -27,7 +27,7 @@ func action(ctx context.Context, c *cli.Command) error {
 	}
 
 	if aiKey != "" && nexusKey != "" {
-		err := config.SetKeyring(config.YamlKeyGenAiApiKey, aiKey)
+		err := config.SetKeyring(config.YamlKeyLlmApiKey, aiKey)
 
 		var sb strings.Builder
 		sb.WriteString("Config initialized, but failed to set keyring:\n")

@@ -20,7 +20,7 @@ func action(ctx context.Context, c *cli.Command) error {
 	}
 
 	var previousValue string
-	useKeyring := yamlKey == config.YamlKeyGenAiApiKey || yamlKey == config.YamlKeyNexusApiKey
+	useKeyring := yamlKey == config.YamlKeyLlmApiKey || yamlKey == config.YamlKeyNexusApiKey
 	if useKeyring {
 		err = config.SetKeyring(yamlKey, value)
 		if err != nil {

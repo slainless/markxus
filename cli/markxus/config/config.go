@@ -3,7 +3,7 @@ package config
 const Version = "v0.1.9"
 
 type MarkxusConfig struct {
-	GenAi struct {
+	Llm struct {
 		Provider  EnumValue[Provider]
 		ApiKey    string
 		ModelName string
@@ -39,7 +39,7 @@ type MarkxusConfig struct {
 var Config MarkxusConfig
 
 func init() {
-	Config.GenAi.Provider = EnumValue[Provider]{
+	Config.Llm.Provider = EnumValue[Provider]{
 		Enum:    []Provider{ProviderOpenAi, ProviderGenAi},
 		Default: ProviderGenAi,
 	}
@@ -50,10 +50,10 @@ func init() {
 }
 
 var (
-	YamlKeyGenAiProvider           = "genai_provider"
-	YamlKeyGenAiApiKey             = "genai_api_key"
-	YamlKeyGenAiModelName          = "genai_model_name"
-	YamlKeyMarkxusPromptFormat     = "genai_prompt_format"
+	YamlKeyLlmProvider             = "llm_provider"
+	YamlKeyLlmApiKey               = "llm_api_key"
+	YamlKeyLlmModelName            = "llm_model_name"
+	YamlKeyMarkxusPromptFormat     = "llm_prompt_format"
 	YamlKeyNexusApiKey             = "nexus_api_key"
 	YamlKeyNexusUrlGetModFormat    = "nexus_url_get_mod_format"
 	YamlKeyMarkxusUrlModPageFormat = "nexus_url_mod_page_format"
@@ -65,10 +65,10 @@ var (
 )
 
 var (
-	EnvKeyGenAiProvider           = "GEN_AI_PROVIDER"
-	EnvKeyGenAiApiKey             = "GEN_AI_API_KEY"
-	EnvKeyGenAiModelName          = "GEN_AI_MODEL_NAME"
-	EnvKeyMarkxusPromptFormat     = "GEN_AI_PROMPT_FORMAT"
+	EnvKeyLlmProvider             = "LLM_PROVIDER"
+	EnvKeyLlmApiKey               = "LLM_API_KEY"
+	EnvKeyLlmModelName            = "LLM_MODEL_NAME"
+	EnvKeyMarkxusPromptFormat     = "LLM_PROMPT_FORMAT"
 	EnvKeyNexusApiKey             = "NEXUS_API_KEY"
 	EnvKeyNexusUrlGetModFormat    = "NEXUS_URL_GET_MOD_FORMAT"
 	EnvKeyMarkxusUrlModPageFormat = "NEXUS_URL_MOD_PAGE_FORMAT"
@@ -79,9 +79,9 @@ var (
 )
 
 var yamlToEnv = map[string]string{
-	YamlKeyGenAiProvider:           EnvKeyGenAiProvider,
-	YamlKeyGenAiApiKey:             EnvKeyGenAiApiKey,
-	YamlKeyGenAiModelName:          EnvKeyGenAiModelName,
+	YamlKeyLlmProvider:             EnvKeyLlmProvider,
+	YamlKeyLlmApiKey:               EnvKeyLlmApiKey,
+	YamlKeyLlmModelName:            EnvKeyLlmModelName,
 	YamlKeyMarkxusPromptFormat:     EnvKeyMarkxusPromptFormat,
 	YamlKeyNexusApiKey:             EnvKeyNexusApiKey,
 	YamlKeyNexusUrlGetModFormat:    EnvKeyNexusUrlGetModFormat,
@@ -93,9 +93,9 @@ var yamlToEnv = map[string]string{
 }
 
 var envToYaml = map[string]string{
-	EnvKeyGenAiProvider:           YamlKeyGenAiProvider,
-	EnvKeyGenAiApiKey:             YamlKeyGenAiApiKey,
-	EnvKeyGenAiModelName:          YamlKeyGenAiModelName,
+	EnvKeyLlmProvider:             YamlKeyLlmProvider,
+	EnvKeyLlmApiKey:               YamlKeyLlmApiKey,
+	EnvKeyLlmModelName:            YamlKeyLlmModelName,
 	EnvKeyMarkxusPromptFormat:     YamlKeyMarkxusPromptFormat,
 	EnvKeyNexusApiKey:             YamlKeyNexusApiKey,
 	EnvKeyNexusUrlGetModFormat:    YamlKeyNexusUrlGetModFormat,
@@ -116,14 +116,14 @@ func YamlToEnv(key string) string {
 
 func Resolve(envKey string) any {
 	switch envKey {
-	case EnvKeyGenAiProvider:
-		return Config.GenAi.Provider.Selected()
-	case EnvKeyGenAiApiKey:
-		return Config.GenAi.ApiKey
-	case EnvKeyGenAiModelName:
-		return Config.GenAi.ModelName
+	case EnvKeyLlmProvider:
+		return Config.Llm.Provider.Selected()
+	case EnvKeyLlmApiKey:
+		return Config.Llm.ApiKey
+	case EnvKeyLlmModelName:
+		return Config.Llm.ModelName
 	case EnvKeyMarkxusPromptFormat:
-		return Config.GenAi.Prompt
+		return Config.Llm.Prompt
 	case EnvKeyNexusApiKey:
 		return Config.Nexus.ApiKey
 	case EnvKeyNexusUrlGetModFormat:

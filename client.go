@@ -13,9 +13,9 @@ type Markxus struct {
 	nexus *nexus.Client
 }
 
-func NewMarkxus(nexusClient *nexus.Client, genAiClient LlmClient, options ...MarkxusOption) *Markxus {
+func NewMarkxus(nexusClient *nexus.Client, llmClient LlmClient, options ...MarkxusOption) *Markxus {
 	markxusOptions := &MarkxusOptions{
-		GenAiPromptFormat:      DefaultGenAiPromptFormat,
+		LlmPromptFormat:        DefaultLlmPromptFormat,
 		UrlModPageFormat:       DefaultUrlModPageFormat,
 		MarkdownHeaderTemplate: DefaultMarkdownHeaderTemplate,
 	}
@@ -26,7 +26,7 @@ func NewMarkxus(nexusClient *nexus.Client, genAiClient LlmClient, options ...Mar
 
 	return &Markxus{
 		nexus:   nexusClient,
-		llm:     genAiClient,
+		llm:     llmClient,
 		options: markxusOptions,
 	}
 }

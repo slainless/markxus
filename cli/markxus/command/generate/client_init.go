@@ -37,16 +37,16 @@ func createClient(ctx context.Context, c *cli.Command) (*markxus.Markxus, error)
 	}
 
 	var llmClient markxus.LlmClient
-	switch config.Config.GenAi.Provider.Selected() {
+	switch config.Config.Llm.Provider.Selected() {
 	case config.ProviderGenAi:
 		llmClient, err = genai.NewGenAiClient(ctx,
-			genai.WithApiKey(config.Config.GenAi.ApiKey),
-			genai.WithModelName(config.Config.GenAi.ModelName),
+			genai.WithApiKey(config.Config.Llm.ApiKey),
+			genai.WithModelName(config.Config.Llm.ModelName),
 		)
 	case config.ProviderOpenAi:
 		llmClient, err = openai.NewOpenAiClient(
-			openai.WithApiKey(config.Config.GenAi.ApiKey),
-			openai.WithModelName(config.Config.GenAi.ModelName),
+			openai.WithApiKey(config.Config.Llm.ApiKey),
+			openai.WithModelName(config.Config.Llm.ModelName),
 		)
 	}
 	if err != nil {
@@ -54,7 +54,7 @@ func createClient(ctx context.Context, c *cli.Command) (*markxus.Markxus, error)
 	}
 
 	return markxus.NewMarkxus(nexusClient, llmClient,
-		markxus.WithPromptFormat(config.Config.GenAi.Prompt),
+		markxus.WithPromptFormat(config.Config.Llm.Prompt),
 		markxus.WithUrlModPageFormat(config.Config.Nexus.Url.ModPageFormat),
 		markxus.WithMarkdownHeaderTemplate(headerTemplate),
 	), nil

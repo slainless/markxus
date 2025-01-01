@@ -8,60 +8,60 @@ import (
 )
 
 var (
-	GenAICategory = "GenAI"
+	LLMCategory = "LLM"
 
-	FlagGenAiProvider = &cli.GenericFlag{
-		Name:        "genai-provider",
+	FlagLlmProvider = &cli.GenericFlag{
+		Name:        "llm-provider",
 		Aliases:     []string{"gp"},
-		Usage:       "Provider to be used, either from OpenAI (open_ai) or Google Generative AI (gen_ai)",
+		Usage:       "LLM provider to be used, either from OpenAI (open_ai) or Google Generative AI (gen_ai)",
 		DefaultText: "global",
-		Value:       &Config.GenAi.Provider,
+		Value:       &Config.Llm.Provider,
 		Sources: cli.NewValueSourceChain(
-			cli.EnvVar(EnvKeyGenAiProvider),
-			cli.NewMapValueSource(YamlKeyGenAiProvider, YamlSourceLocal),
-			cli.NewMapValueSource(YamlKeyGenAiProvider, YamlSourceGlobal),
+			cli.EnvVar(EnvKeyLlmProvider),
+			cli.NewMapValueSource(YamlKeyLlmProvider, YamlSourceLocal),
+			cli.NewMapValueSource(YamlKeyLlmProvider, YamlSourceGlobal),
 		),
 	}
 
-	FlagGenAiApiKey = &cli.StringFlag{
-		Name:        "genai-key",
+	FlagLlmApiKey = &cli.StringFlag{
+		Name:        "llm-key",
 		Aliases:     []string{"gk"},
-		Destination: &Config.GenAi.ApiKey,
-		Category:    GenAICategory,
+		Destination: &Config.Llm.ApiKey,
+		Category:    LLMCategory,
 		Required:    true,
-		Usage:       "API key to be used for generative ai requests",
+		Usage:       "API key to be used for AI generation",
 
 		Sources: cli.NewValueSourceChain(
-			cli.EnvVar(EnvKeyGenAiApiKey),
-			cli.NewMapValueSource(YamlKeyGenAiApiKey, YamlSourceLocal),
-			cli.NewMapValueSource(YamlKeyGenAiApiKey, YamlSourceGlobal),
-			cli.NewMapValueSource(YamlKeyGenAiApiKey, KeyringSource),
+			cli.EnvVar(EnvKeyLlmApiKey),
+			cli.NewMapValueSource(YamlKeyLlmApiKey, YamlSourceLocal),
+			cli.NewMapValueSource(YamlKeyLlmApiKey, YamlSourceGlobal),
+			cli.NewMapValueSource(YamlKeyLlmApiKey, KeyringSource),
 		),
 	}
 
-	FlagGenAiModelName = &cli.StringFlag{
+	FlagLlmModelName = &cli.StringFlag{
 		Name:        "model",
 		Aliases:     []string{"m"},
-		Destination: &Config.GenAi.ModelName,
-		Category:    GenAICategory,
+		Destination: &Config.Llm.ModelName,
+		Category:    LLMCategory,
 		DefaultText: genai.DefaultModelName,
-		Usage:       "Model name to be used for generative ai requests",
+		Usage:       "Model name to be used for AI generation",
 		Value:       genai.DefaultModelName,
 		Sources: cli.NewValueSourceChain(
-			cli.EnvVar(EnvKeyGenAiModelName),
-			cli.NewMapValueSource(YamlKeyGenAiModelName, YamlSourceLocal),
-			cli.NewMapValueSource(YamlKeyGenAiModelName, YamlSourceGlobal),
+			cli.EnvVar(EnvKeyLlmModelName),
+			cli.NewMapValueSource(YamlKeyLlmModelName, YamlSourceLocal),
+			cli.NewMapValueSource(YamlKeyLlmModelName, YamlSourceGlobal),
 		),
 	}
 
 	FlagMarkxusPromptFormat = &cli.StringFlag{
 		Name:        "prompt",
 		Aliases:     []string{"p"},
-		Destination: &Config.GenAi.Prompt,
-		Category:    GenAICategory,
-		DefaultText: "[[DefaultGenAiPromptFormat]]",
-		Usage:       "Prompt format to be used for generative ai requests",
-		Value:       markxus.DefaultGenAiPromptFormat,
+		Destination: &Config.Llm.Prompt,
+		Category:    LLMCategory,
+		DefaultText: "[[DefaultLlmPromptFormat]]",
+		Usage:       "Prompt format to be used for AI generation",
+		Value:       markxus.DefaultLlmPromptFormat,
 		Sources: cli.NewValueSourceChain(
 			cli.EnvVar(EnvKeyMarkxusPromptFormat),
 			cli.NewMapValueSource(YamlKeyMarkxusPromptFormat, YamlSourceLocal),
@@ -198,8 +198,8 @@ var (
 )
 
 var AllFlags = []cli.Flag{
-	FlagGenAiApiKey,
-	FlagGenAiModelName,
+	FlagLlmApiKey,
+	FlagLlmModelName,
 	FlagMarkxusPromptFormat,
 	FlagNexusApiKey,
 	FlagNexusUrlGetModFormat,

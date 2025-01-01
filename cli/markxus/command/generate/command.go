@@ -12,9 +12,9 @@ var Command = &cli.Command{
 	Action:  action,
 	Flags: []cli.Flag{
 		config.FlagFallbackGameCode,
-		config.FlagGenAiProvider,
-		config.FlagGenAiApiKey,
-		config.FlagGenAiModelName,
+		config.FlagLlmProvider,
+		config.FlagLlmApiKey,
+		config.FlagLlmModelName,
 		config.FlagMarkxusPromptFormat,
 		config.FlagNexusApiKey,
 		config.FlagNexusUrlGetModFormat,

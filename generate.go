@@ -64,7 +64,7 @@ func (c *Markxus) Generate(
 		}
 	}
 
-	prompt := fmt.Sprintf(c.options.GenAiPromptFormat, mod.Description)
+	prompt := fmt.Sprintf(c.options.LlmPromptFormat, mod.Description)
 	output, err := c.llm.Send(ctx, prompt, mod, generationCtx.OnLlmStreamConsuming)
 	if err != nil {
 		return nil, err
