@@ -8,7 +8,9 @@ The `cli` package will use [resty](https://github.com/go-resty/resty) as its HTT
 and [google-generative-ai](https://github.com/google/generative-ai-go) as its LLM client.
 
 <div align="center">
-	<img src="./assets/markxus-low.gif" alt="usage-demo"/>
+	<img src="https://github.com/user-attachments/assets/738471dd-7a6f-4d88-879f-aab5a591486b" alt="usage-demo"/>
+</div>
+<div align="center">
 	<sub>The GIF is fast-forwarded</sub>
 </div>
 
@@ -23,7 +25,7 @@ The default markdown header format contains frontmatter and only a handful numbe
 Obsidian is prominently known its for features and its rich community support. Obsidian by default support showing and editing frontmatter. 
 Obsidian community also has many plugins that can handle these data.
 
-![obsidian-graph](./assets/obsidian-graph.png)
+![obsidian-graph](https://github.com/user-attachments/assets/2d967da8-cd46-4ee4-83f5-f87487fe4bf2)
 
 I planned to support these plugins:
   - [🚩 Pixel Banner for Obsidian](https://github.com/jparkerweb/pixel-banner)
