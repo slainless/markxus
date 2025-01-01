@@ -5,7 +5,12 @@
 Markxus is an LLM-powered markdown converter targeted for [Nexus Mods](https://www.nexusmods.com/)'s mod page.
 By default, Markxus is opinionated and it converts nexusmods HTML + [BBCode](https://en.wikipedia.org/wiki/BBCode) into markdown that is catered for Obsidian markdown format.
 The `cli` package will use [resty](https://github.com/go-resty/resty) as its HTTP client 
-and [google-generative-ai](https://github.com/google/generative-ai-go) as its LLM client. 
+and [google-generative-ai](https://github.com/google/generative-ai-go) as its LLM client.
+
+<div align="center">
+	<img src="./assets/markxus-low.gif" alt="usage-demo"/>
+	<sub>The GIF is fast-forwarded</sub>
+</div>
 
 This package provides built-in supports for both [Resty (./resty)](./resty) and [Google Generative AI (./genai)](./genai/).
 
@@ -17,6 +22,8 @@ a dedicated `cli` package must be created instead to make use of these interface
 The default markdown header format contains frontmatter and only a handful number of editors are capable of making use of these data.
 Obsidian is prominently known its for features and its rich community support. Obsidian by default support showing and editing frontmatter. 
 Obsidian community also has many plugins that can handle these data.
+
+![obsidian-graph](./assets/obsidian-graph.png)
 
 I planned to support these plugins:
   - [🚩 Pixel Banner for Obsidian](https://github.com/jparkerweb/pixel-banner)
