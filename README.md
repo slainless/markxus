@@ -7,6 +7,12 @@
 	<sub>The GIF is fast-forwarded</sub>
 </p>
 
+> [!TIP]
+> Use `gemini-1.5-pro` model to generate more accurate result as shown in the GIF above!
+>
+> Using flash model (default option) will result in inaccurate mod referencing result but generate faster. Instead, pro model
+> generate a very accurate result with tradeoff being slower generation.
+
 Markxus is an LLM-powered markdown converter targeted for [Nexus Mods](https://www.nexusmods.com/)'s mod page.
 By default, Markxus is opinionated and it converts nexusmods HTML + [BBCode](https://en.wikipedia.org/wiki/BBCode) into markdown that is catered for Obsidian markdown format.
 The `cli` package will use [resty](https://github.com/go-resty/resty) as its HTTP client 
