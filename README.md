@@ -2,17 +2,15 @@
 
 <img alt="Custom badge" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fradj307%2Fe9a80731ee236cc67fb00b698e75201e%2Fraw%2F5230074dfb1a60fba917a1232f9382fa5cfec5db%2Fendpoint.json&style=for-the-badge"> ![Google Gemini](https://img.shields.io/badge/google%20gemini-8E75B2?style=for-the-badge&logo=google%20gemini&logoColor=white) ![Markdown](https://img.shields.io/badge/markdown-%23000000.svg?style=for-the-badge&logo=markdown&logoColor=white) ![Obsidian](https://img.shields.io/badge/Obsidian-%23483699.svg?style=for-the-badge&logo=obsidian&logoColor=white)
 
+<img src="https://github.com/user-attachments/assets/738471dd-7a6f-4d88-879f-aab5a591486b" alt="usage-demo"/>
+<p>
+	<sub>The GIF is fast-forwarded</sub>
+</p>
+
 Markxus is an LLM-powered markdown converter targeted for [Nexus Mods](https://www.nexusmods.com/)'s mod page.
 By default, Markxus is opinionated and it converts nexusmods HTML + [BBCode](https://en.wikipedia.org/wiki/BBCode) into markdown that is catered for Obsidian markdown format.
 The `cli` package will use [resty](https://github.com/go-resty/resty) as its HTTP client 
 and [google-generative-ai](https://github.com/google/generative-ai-go) as its LLM client.
-
-<div align="center">
-	<img src="https://github.com/user-attachments/assets/738471dd-7a6f-4d88-879f-aab5a591486b" alt="usage-demo"/>
-</div>
-<div align="center">
-	<sub>The GIF is fast-forwarded</sub>
-</div>
 
 This package provides built-in supports for both [Resty (./resty)](./resty) and [Google Generative AI (./genai)](./genai/).
 
@@ -21,13 +19,13 @@ a dedicated `cli` package must be created instead to make use of these interface
 
 ## Obsidian markdown
 
+![obsidian](https://github.com/user-attachments/assets/6ce507bc-2e25-4143-8d02-e378340b13a0)
+
 The default markdown header format contains frontmatter and only a handful number of editors are capable of making use of these data.
 Obsidian is prominently known its for features and its rich community support. Obsidian by default support showing and editing frontmatter. 
 Obsidian community also has many plugins that can handle these data.
 
-![obsidian-graph](https://github.com/user-attachments/assets/2d967da8-cd46-4ee4-83f5-f87487fe4bf2)
-
-I planned to support these plugins:
+Supported plugins:
   - [🚩 Pixel Banner for Obsidian](https://github.com/jparkerweb/pixel-banner)
   - [Obsidian Iconize](https://github.com/FlorianWoelki/obsidian-iconize)
 
@@ -38,6 +36,8 @@ More support to be added later.
 Recently, I tried to seriously rebuild my Skyrim mod list for the latest version. Obsidian is very handy in organizing pile ton of
 mods information, and with its graph view, it helps a lot in quickly finding relevant mods, compatibility with each other, etc.
 However, I dont have that much time to index every mods I use to Obsidian, so here we are.
+
+![obsidian-graph](https://github.com/user-attachments/assets/b542e29b-d554-496f-97bc-afad6b48e97a)
 
 Now, LLM is needed in this case since I need to annotate all cross-mod references with `[[Obsidian internal linking]]` and LLM is intelligent 
 enough to guess whether some tokens are actually a mention or title of another mod. 
