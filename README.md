@@ -60,7 +60,10 @@ Recently, I tried to seriously rebuild my Skyrim mod list for the latest version
 mods information, and with its graph view, it helps a lot in quickly finding relevant mods, compatibility with each other, etc.
 However, I dont have that much time to index every mods I use to Obsidian, so here we are.
 
-![obsidian-graph](https://github.com/user-attachments/assets/b542e29b-d554-496f-97bc-afad6b48e97a)
+![graph-view](https://github.com/user-attachments/assets/d53aa089-c3aa-4482-b105-3043f5be858a)
+<p>
+	<sub>All the markdowns are AI-generated. Now its easier to see relationship between each mods.</sub>
+</p>
 
 Now, LLM is needed in this case since I need to annotate all cross-mod references with `[[Obsidian internal linking]]` and LLM is intelligent 
 enough to guess whether some tokens are actually a mention or title of another mod. 
