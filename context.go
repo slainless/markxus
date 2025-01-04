@@ -6,13 +6,14 @@ import (
 	"github.com/slainless/markxus/nexus"
 )
 
-type OnHeaderCreationHook func(ctx context.Context, header string) error
+type OnTemplateExecutedHook func(ctx context.Context, result string) error
 type OnModFetchedHook func(ctx context.Context, mod *nexus.SchemaMod) error
 
 type GenerationContext struct {
 	// sorted by call sequence
 	OnModFetched         OnModFetchedHook
-	OnHeaderCreated      OnHeaderCreationHook
+	OnHeaderCreated      OnTemplateExecutedHook
+	OnPromptCreated      OnTemplateExecutedHook
 	OnLlmStreamConsuming LlmStreamConsumeHook
 	CategoryIconMap      map[int]*CategoryIconMap
 }
@@ -25,9 +26,15 @@ type CategoryIconMap struct {
 	Icon string `json:"icon"`
 }
 
-func WithOnHeaderCreation(f OnHeaderCreationHook) GenerationContextOption {
+func WithOnHeaderCreation(f OnTemplateExecutedHook) GenerationContextOption {
 	return func(ctx *GenerationContext) {
 		ctx.OnHeaderCreated = f
+	}
+}
+
+func WithOnPromptCreation(f OnTemplateExecutedHook) GenerationContextOption {
+	return func(ctx *GenerationContext) {
+		ctx.OnPromptCreated = f
 	}
 }
 

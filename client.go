@@ -15,8 +15,8 @@ type Markxus struct {
 
 func NewMarkxus(nexusClient *nexus.Client, llmClient LlmClient, options ...MarkxusOption) *Markxus {
 	markxusOptions := &MarkxusOptions{
-		LlmPromptFormat:        DefaultLlmPromptFormat,
 		UrlModPageFormat:       DefaultUrlModPageFormat,
+		LlmPromptTemplate:      DefaultLlmPromptTemplate,
 		MarkdownHeaderTemplate: DefaultMarkdownHeaderTemplate,
 	}
 

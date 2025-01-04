@@ -62,6 +62,7 @@ func action(ctx context.Context, c *cli.Command) error {
 	vars.WriteString(createVarEntry(configType, config.YamlKeyMarkxusPromptFormat, theme) + "\n\n")
 	vars.WriteString(createVarEntry(configType, config.YamlKeyNexusApiKey, theme) + "\n\n")
 	vars.WriteString(createVarEntry(configType, config.YamlKeyNexusUrlGetModFormat, theme) + "\n\n")
+	vars.WriteString(createVarEntry(configType, config.YamlKeyNexusUrlGetFilesFormat, theme) + "\n\n")
 	vars.WriteString(createVarEntry(configType, config.YamlKeyMarkxusUrlModPageFormat, theme) + "\n\n")
 	vars.WriteString(createVarEntry(configType, config.YamlKeyMarkdownHeaderFormat, theme) + "\n\n")
 	vars.WriteString(createVarEntry(configType, config.YamlKeyOutputDir, theme) + "\n\n")

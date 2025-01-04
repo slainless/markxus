@@ -1,6 +1,6 @@
 package config
 
-const Version = "v0.2.0"
+const Version = "v0.2.1"
 
 type MarkxusConfig struct {
 	Llm struct {
@@ -15,8 +15,9 @@ type MarkxusConfig struct {
 		ApiKey string
 
 		Url struct {
-			GetModFormat  string
-			ModPageFormat string
+			GetModFormat   string
+			GetFilesFormat string
+			ModPageFormat  string
 		}
 	}
 
@@ -56,6 +57,7 @@ var (
 	YamlKeyMarkxusPromptFormat     = "llm_prompt_format"
 	YamlKeyNexusApiKey             = "nexus_api_key"
 	YamlKeyNexusUrlGetModFormat    = "nexus_url_get_mod_format"
+	YamlKeyNexusUrlGetFilesFormat  = "nexus_url_get_files_format"
 	YamlKeyMarkxusUrlModPageFormat = "nexus_url_mod_page_format"
 	YamlKeyMarkdownHeaderFormat    = "markdown_header_format"
 	YamlKeyFallbackGameCode        = "fallback_game_code"
@@ -71,6 +73,7 @@ var (
 	EnvKeyMarkxusPromptFormat     = "LLM_PROMPT_FORMAT"
 	EnvKeyNexusApiKey             = "NEXUS_API_KEY"
 	EnvKeyNexusUrlGetModFormat    = "NEXUS_URL_GET_MOD_FORMAT"
+	EnvKeyNexusUrlGetFilesFormat  = "NEXUS_URL_GET_FILES_FORMAT"
 	EnvKeyMarkxusUrlModPageFormat = "NEXUS_URL_MOD_PAGE_FORMAT"
 	EnvKeyMarkdownHeaderFormat    = "MARKDOWN_HEADER_FORMAT"
 	EnvKeyFallbackGameCode        = "FALLBACK_GAME_CODE"
@@ -85,6 +88,7 @@ var yamlToEnv = map[string]string{
 	YamlKeyMarkxusPromptFormat:     EnvKeyMarkxusPromptFormat,
 	YamlKeyNexusApiKey:             EnvKeyNexusApiKey,
 	YamlKeyNexusUrlGetModFormat:    EnvKeyNexusUrlGetModFormat,
+	YamlKeyNexusUrlGetFilesFormat:  EnvKeyNexusUrlGetFilesFormat,
 	YamlKeyMarkxusUrlModPageFormat: EnvKeyMarkxusUrlModPageFormat,
 	YamlKeyMarkdownHeaderFormat:    EnvKeyMarkdownHeaderFormat,
 	YamlKeyFallbackGameCode:        EnvKeyFallbackGameCode,
@@ -99,6 +103,7 @@ var envToYaml = map[string]string{
 	EnvKeyMarkxusPromptFormat:     YamlKeyMarkxusPromptFormat,
 	EnvKeyNexusApiKey:             YamlKeyNexusApiKey,
 	EnvKeyNexusUrlGetModFormat:    YamlKeyNexusUrlGetModFormat,
+	EnvKeyNexusUrlGetFilesFormat:  YamlKeyNexusUrlGetFilesFormat,
 	EnvKeyMarkxusUrlModPageFormat: YamlKeyMarkxusUrlModPageFormat,
 	EnvKeyMarkdownHeaderFormat:    YamlKeyMarkdownHeaderFormat,
 	EnvKeyFallbackGameCode:        YamlKeyFallbackGameCode,
@@ -128,6 +133,8 @@ func Resolve(envKey string) any {
 		return Config.Nexus.ApiKey
 	case EnvKeyNexusUrlGetModFormat:
 		return Config.Nexus.Url.GetModFormat
+	case EnvKeyNexusUrlGetFilesFormat:
+		return Config.Nexus.Url.GetFilesFormat
 	case EnvKeyMarkxusUrlModPageFormat:
 		return Config.Nexus.Url.ModPageFormat
 	case EnvKeyMarkdownHeaderFormat:

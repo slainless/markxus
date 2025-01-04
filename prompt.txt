@@ -6,6 +6,7 @@ mod page that uses image as heading instead.
 
 Your task:
 - Convert this fragment to markdown
+- NEVER wrap the entire answer with block code (```), just output the raw markdown instead.
 - You MUST wrap all references/mention to other mod with format `[[{mod_name}]]`, whether or not it has backlink url or not.
   - Mention/reference to other mod name may also be in form of abbreviation of said mod. If in doubt, just wrap it.
   - Look out for Compatibility, Incompatibility, or Requirement section in the mod page since it will be highly likely that
@@ -23,4 +24,14 @@ Your task:
 
 And here is the fragment:
 
-%v
+{{.Description}}
+
+## Files
+
+{{range .Files.Files}}
+### {{.Name}}
+
+`{{.FileName}}`
+
+{{.Description}}
+{{end}}

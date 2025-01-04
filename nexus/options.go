@@ -4,12 +4,14 @@ type ClientOptions struct {
 	Driver HttpClient
 	ApiKey string
 
-	UrlGetModFormat string
+	UrlGetModFormat   string
+	UrlGetFilesFormat string
 }
 
 type ClientOption func(*ClientOptions)
 
 const DefaultUrlGetModFormat = "https://api.nexusmods.com/v1/games/%v/mods/%v.json"
+const DefaultUrlGetFilesFormat = "https://api.nexusmods.com/v1/games/%v/mods/%v/files.json"
 
 func WithApiKey(key string) ClientOption {
 	return func(nc *ClientOptions) {
@@ -31,5 +33,11 @@ func WithHTTPDriver(driver HttpClient) ClientOption {
 func WithUrlGetModFormat(format string) ClientOption {
 	return func(c *ClientOptions) {
 		c.UrlGetModFormat = format
+	}
+}
+
+func WithUrlGetFilesFormat(format string) ClientOption {
+	return func(c *ClientOptions) {
+		c.UrlGetFilesFormat = format
 	}
 }

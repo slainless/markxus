@@ -6,13 +6,14 @@ import (
 )
 
 type MarkxusOptions struct {
-	LlmPromptFormat        string
 	UrlModPageFormat       string
 	MarkdownHeaderTemplate *template.Template
+	LlmPromptTemplate      *template.Template
 }
 
 //go:embed prompt.txt
 var DefaultLlmPromptFormat string
+var DefaultLlmPromptTemplate *template.Template
 
 //go:embed header.txt
 var DefaultMarkdownHeaderFormat string
@@ -25,24 +26,19 @@ func init() {
 	}
 
 	DefaultMarkdownHeaderTemplate = template
+
+	template, err = template.New("markxus.prompt").Parse(DefaultLlmPromptFormat)
+	if err != nil {
+		panic(err)
+	}
+
+	DefaultLlmPromptTemplate = template
 }
 
 const DefaultLlmModelName = "gemini-1.5-flash"
 const DefaultUrlModPageFormat = "https://nexusmods.com/%v/mods/%v"
 
 type MarkxusOption func(*MarkxusOptions)
-
-// Format should contains placeholder that will be filled with
-// these parameters in sequence:
-//
-//   - Mod description
-//
-// Defaults to [[DefaultLlmPromptFormat]]
-func WithPromptFormat(prompt string) MarkxusOption {
-	return func(mo *MarkxusOptions) {
-		mo.LlmPromptFormat = prompt
-	}
-}
 
 // Format should contains 2 placeholder in this sequence:
 //   - Game code
@@ -52,6 +48,13 @@ func WithPromptFormat(prompt string) MarkxusOption {
 func WithUrlModPageFormat(format string) MarkxusOption {
 	return func(mo *MarkxusOptions) {
 		mo.UrlModPageFormat = format
+	}
+}
+
+// Template will be exposed to [[nexus.SchemaMod]]
+func WithPromptTemplate(template *template.Template) MarkxusOption {
+	return func(mo *MarkxusOptions) {
+		mo.LlmPromptTemplate = template
 	}
 }
 

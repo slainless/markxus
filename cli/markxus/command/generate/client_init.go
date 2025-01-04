@@ -26,11 +26,22 @@ func createClient(ctx context.Context, c *cli.Command) (*markxus.Markxus, error)
 		}
 	}
 
+	var promptTemplate *template.Template
+	if config.Config.Llm.Prompt == markxus.DefaultLlmPromptFormat {
+		promptTemplate = markxus.DefaultLlmPromptTemplate
+	} else {
+		promptTemplate, err = template.New("markxus.prompt").Parse(markxus.DefaultLlmPromptFormat)
+		if err != nil {
+			return nil, err
+		}
+	}
+
 	resty := resty.NewRestyClient()
 	nexusClient, err := nexus.NewClient(
 		nexus.WithApiKey(config.Config.Nexus.ApiKey),
 		nexus.WithHTTPDriver(resty),
 		nexus.WithUrlGetModFormat(config.Config.Nexus.Url.GetModFormat),
+		nexus.WithUrlGetFilesFormat(config.Config.Nexus.Url.GetFilesFormat),
 	)
 	if err != nil {
 		return nil, err
@@ -54,8 +65,8 @@ func createClient(ctx context.Context, c *cli.Command) (*markxus.Markxus, error)
 	}
 
 	return markxus.NewMarkxus(nexusClient, llmClient,
-		markxus.WithPromptFormat(config.Config.Llm.Prompt),
 		markxus.WithUrlModPageFormat(config.Config.Nexus.Url.ModPageFormat),
+		markxus.WithPromptTemplate(promptTemplate),
 		markxus.WithMarkdownHeaderTemplate(headerTemplate),
 	), nil
 }

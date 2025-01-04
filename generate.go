@@ -49,7 +49,7 @@ func (c *Markxus) Generate(
 		}
 	}
 
-	header, err := processHeader(
+	header, err := processTemplate(
 		c.options.MarkdownHeaderTemplate,
 		mod,
 	)
@@ -64,7 +64,21 @@ func (c *Markxus) Generate(
 		}
 	}
 
-	prompt := fmt.Sprintf(c.options.LlmPromptFormat, mod.Description)
+	prompt, err := processTemplate(
+		c.options.LlmPromptTemplate,
+		mod,
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	if generationCtx.OnPromptCreated != nil {
+		err := generationCtx.OnPromptCreated(ctx, prompt)
+		if err != nil {
+			return nil, err
+		}
+	}
+
 	output, err := c.llm.Send(ctx, prompt, mod, generationCtx.OnLlmStreamConsuming)
 	if err != nil {
 		return nil, err
@@ -78,7 +92,7 @@ func (c *Markxus) Generate(
 	}, nil
 }
 
-func processHeader(format *template.Template, mod *nexus.SchemaMod) (string, error) {
+func processTemplate(format *template.Template, mod *nexus.SchemaMod) (string, error) {
 	builder := &strings.Builder{}
 	err := format.Execute(builder, mod)
 	if err != nil {

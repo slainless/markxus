@@ -91,17 +91,32 @@ var (
 	}
 
 	FlagNexusUrlGetModFormat = &cli.StringFlag{
-		Name:        "api-url-format",
-		Aliases:     []string{"af"},
+		Name:        "api-mod-url-format",
+		Aliases:     []string{"am"},
 		Destination: &Config.Nexus.Url.GetModFormat,
 		Category:    "Nexus",
 		DefaultText: nexus.DefaultUrlGetModFormat,
-		Usage:       "URL format to be for mod data API",
+		Usage:       "URL format for mod data API",
 		Value:       nexus.DefaultUrlGetModFormat,
 		Sources: cli.NewValueSourceChain(
 			cli.EnvVar(EnvKeyNexusUrlGetModFormat),
 			cli.NewMapValueSource(YamlKeyNexusUrlGetModFormat, YamlSourceLocal),
 			cli.NewMapValueSource(YamlKeyNexusUrlGetModFormat, YamlSourceGlobal),
+		),
+	}
+
+	FlagNexusUrlGetModFilesFormat = &cli.StringFlag{
+		Name:        "api-files-url-format",
+		Aliases:     []string{"af"},
+		Destination: &Config.Nexus.Url.GetFilesFormat,
+		Category:    "Nexus",
+		DefaultText: nexus.DefaultUrlGetFilesFormat,
+		Usage:       "URL format for mod files data API",
+		Value:       nexus.DefaultUrlGetFilesFormat,
+		Sources: cli.NewValueSourceChain(
+			cli.EnvVar(EnvKeyNexusUrlGetFilesFormat),
+			cli.NewMapValueSource(YamlKeyNexusUrlGetFilesFormat, YamlSourceLocal),
+			cli.NewMapValueSource(YamlKeyNexusUrlGetFilesFormat, YamlSourceGlobal),
 		),
 	}
 

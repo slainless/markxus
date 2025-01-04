@@ -20,6 +20,7 @@ var Command = &cli.Command{
 		config.FlagMarkxusPromptFormat,
 		config.FlagNexusApiKey,
 		config.FlagNexusUrlGetModFormat,
+		config.FlagNexusUrlGetModFilesFormat,
 		config.FlagMarkxusUrlModPageFormat,
 		config.FlagMarkdownHeaderFormat,
 		config.FlagOutputDir,
