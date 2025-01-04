@@ -73,16 +73,17 @@ func action(ctx context.Context, c *cli.Command) error {
 		}
 	}()
 
-	if _, err := program.Run(); err != nil {
+	m, err := program.Run()
+	if err != nil {
+		return err
+	}
+
+	if err := m.(view).quitErr; err != nil {
 		return err
 	}
 
 	if generateError != nil {
 		return generateError
-	}
-
-	if quitErr != nil {
-		return quitErr
 	}
 
 	theme := style.GetTheme()

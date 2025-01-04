@@ -8,11 +8,10 @@ import (
 	"github.com/slainless/markxus/cli/markxus/internal/style"
 )
 
-var quitErr error
-
 type view struct {
 	done     bool
 	progress generate_progress.Model
+	quitErr  error
 }
 
 func (v view) Init() tea.Cmd {
@@ -28,7 +27,7 @@ func (v view) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case tea.KeyMsg:
 		switch msg.String() {
 		case "ctrl+c":
-			quitErr = errors.New("Cancelled by CTRL+C")
+			v.quitErr = errors.New("Cancelled by CTRL+C")
 			return v.Update(DoneMsg(0))
 		}
 	}
